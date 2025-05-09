@@ -35,7 +35,7 @@ namespace Customer_Repo {
         return false;
     }
 
-    Customer Customer_Repo::find_client_by_email(const string &email) {
+    Customer Customer_Repo::find_client_by_email(const string& email) {
         for (int i = 0; i < customers.size(); i++) {
             if (customers[i]->get_email() == email) {
                 return *customers[i];

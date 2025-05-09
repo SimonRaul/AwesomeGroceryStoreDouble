@@ -6,6 +6,8 @@
 #include <string>
 #include <chrono>
 
+#include "../../User/Domain/User.h"
+
 using namespace std;
 using namespace chrono;
 using namespace userdomain;
