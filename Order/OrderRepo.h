@@ -16,6 +16,7 @@ class OrderRepo {
   std::vector<domain::OrderDomain> orders;
 
   public:
+  OrderRepo(std::vector<domain::OrderDomain> orders);
 
   const std::vector<domain::OrderDomain>& getOrders();
 

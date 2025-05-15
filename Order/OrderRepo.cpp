@@ -12,6 +12,10 @@ using namespace domain;
 
 namespace repository {
 
+    OrderRepo::OrderRepo(std::vector<domain::OrderDomain> orders) {
+      this->orders = orders;
+    }
+
     const std::vector<domain::OrderDomain>& OrderRepo::getOrders() {
         return orders;
     }
