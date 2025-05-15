@@ -4,18 +4,21 @@
 #include <vector>
 #include "../Domain/Product.h"
 
-namespace Product{
+using namespace productdomain;
 
-class ProductRepository {
-private:
-    std::vector<Product> Products;
+namespace productrepo
+{
+    class ProductRepository {
+    private:
+        std::vector<Product> Products;
 
-public:
-  ProductRepository(std::vector<Product> products);
-  bool addProduct(Product product);
-  std::vector<Product> listProducts();
-};
-
+    public:
+        ProductRepository();
+        ProductRepository(std::vector<Product> products);
+        bool addProduct(Product product);
+        std::vector<Product> listProducts();
+    };
 }
+
 
 #endif //PRODUCTREPOSITORY_H

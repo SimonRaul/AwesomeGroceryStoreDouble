@@ -3,7 +3,7 @@
 #define PRODUCT_H
 #include <string>
 
-namespace Product {
+namespace productdomain {
 
 std::string generateUniqueId();
 

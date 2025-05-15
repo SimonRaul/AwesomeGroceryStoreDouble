@@ -1,12 +1,16 @@
 #include "ProductRepository.h"
 #include <vector>
 
+using namespace productrepo;
 
-namespace Product{
+ProductRepository::ProductRepository(){
+ Products = std::vector<Product>();
+}
 
  ProductRepository::ProductRepository(std::vector<Product> products){
   this->Products = products;
  }
+
 
  bool ProductRepository::addProduct(Product product){
   for (auto it = this->Products.begin(); it!= this->Products.end(); it++ ){
@@ -22,4 +26,3 @@ namespace Product{
   return Products;
  }
 
-}
