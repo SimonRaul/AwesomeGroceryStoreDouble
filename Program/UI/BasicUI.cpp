@@ -9,9 +9,10 @@ using namespace basicUI;
 
 //Displays the message that appears at the start of the program
 string BasicUI::display_start_message() {
-    return "Welcome!\n"
-            "Please insert your name and forename\n";
-
+    return "╔════════════════════════════════════════════════════════════╗\n"
+           "║         Welcome to the AWESOME GROCERY STORE 2!           ║\n"
+           "╚════════════════════════════════════════════════════════════╝\n"
+           "Please insert your name and forename!\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
 }
 
 //Method to set the name and forename of the new user
@@ -28,5 +29,5 @@ void BasicUI::insert_informations() {
 //Displays the main menu
 string BasicUI::dispaly_main_menu() {
     return "1 - Create an account\n"
-            "2 - Log in\n";
+            "2 - Log in\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
 }
