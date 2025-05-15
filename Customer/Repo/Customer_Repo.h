@@ -8,6 +8,7 @@
 #include "../Domain/Customer.h"
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 using namespace std;
 using namespace Customer_Domain;

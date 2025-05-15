@@ -1,7 +1,7 @@
 #ifndef ORDERREPO_H
 #define ORDERREPO_H
 
-#include "OrderDomain.h"
+#include "../Order/OrderDomain.h"
 #include "../Product/Domain/Product.h"
 #include "../Customer/Domain/Customer.h"
 #include "../Employee/Domain/Employee.h"
@@ -39,7 +39,7 @@ class OrderRepo {
   void addOrder(const domain::OrderDomain& order);
 
   //Updates the list of products in an order
-  bool updateOrder(int orderNumber, const std::vector<std::pair<Product::Product, int>>& newProducts);
+  bool updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts);
 
   //Changes the status of an order (unless it's already "Completed")
   bool setOrderStatus(int orderNumber, domain::OrderStatus newStatus);
@@ -48,7 +48,7 @@ class OrderRepo {
   bool assignEmployeeIfUnassigned(int orderNumber, const employeedomain::Employee& employee);
 
   //creates a reservation
-  bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product::Product, int>>& products);
+  bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products);
 
 
 };

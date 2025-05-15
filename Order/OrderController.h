@@ -33,7 +33,7 @@ namespace controller {
         void addOrder(const domain::OrderDomain& order);
 
         //Updates the list of products in an order
-        bool updateOrder(int orderNumber, const std::vector<std::pair<Product::Product, int>>& newProducts);
+        bool updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts);
 
         //Changes the status of an order (unless it's already "Completed")
         bool setOrderStatus(int orderNumber, domain::OrderStatus newStatus);
@@ -42,7 +42,7 @@ namespace controller {
         bool assignEmployeeIfUnassigned(int orderNumber, const employeedomain::Employee& employee);
 
         //creates a reservation
-        bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product::Product, int>>& products);
+        bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products);
     };
 
 }
