@@ -1,7 +1,7 @@
 #include "Product.h"
 
 
-namespace Product {
+namespace productdomain {
 
   std::string generateUniqueId() {
     static unsigned long counter = 0;
