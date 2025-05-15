@@ -7,9 +7,9 @@
 
 #include <string>
 #include <memory>
-#include "User.h"
+#include "../Domain/User.h"
 #include "../../Customer/Repo/Customer_Repo.h"
-#include "../Employee/Repo/EmployeeRepo.h"
+#include "../../Employee/Repo/EmployeeRepo.h"
 
 using namespace userdomain;
 

@@ -2,7 +2,7 @@
 #define ORDERREPO_H
 
 #include "OrderDomain.h"
-#include "../Product/Product.h"
+#include "../Product/Domain/Product.h"
 #include "../Customer/Domain/Customer.h"
 #include "../Employee/Domain/Employee.h"
 

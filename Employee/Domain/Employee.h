@@ -4,7 +4,7 @@
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
-#include "../User/Domain/User.h"
+#include "../../User/Domain/User.h"
 #include <string>
 #include <chrono>
 #include <iostream>
@@ -14,7 +14,7 @@ using namespace userdomain;
 
 namespace employeedomain{
 
-class Employee: User {
+class Employee: public User {
 	private:
     string position;
 	year_month_day birthday;
