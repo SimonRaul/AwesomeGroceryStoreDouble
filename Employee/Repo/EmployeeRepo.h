@@ -30,6 +30,8 @@ namespace employeerepo {
 		bool update(int id, const string& position, year_month_day birthday, float salary);
 
 		bool remove(int id);
+
+		Employee find_employee_by_email(const string& email);
 	};
 
 }

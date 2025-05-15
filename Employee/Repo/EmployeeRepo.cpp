@@ -39,4 +39,14 @@ namespace employeerepo {
 		return false;
 	}
 
+	Employee EmployeeRepository::find_employee_by_email(const string &email) {
+		for (int i = 0; i < employees.size(); i++) {
+			if (employees[i]->get_email() == email) {
+				return *employees[i];
+			}
+		}
+		throw runtime_error("Customer not found");
+	}
+
+
 }

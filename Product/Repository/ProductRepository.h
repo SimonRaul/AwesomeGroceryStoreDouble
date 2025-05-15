@@ -2,7 +2,7 @@
 #ifndef PRODUCTREPOSITORY_H
 #define PRODUCTREPOSITORY_H
 #include <vector>
-#include "Product.h"
+#include "../Domain/Product.h"
 
 namespace Product{
 
