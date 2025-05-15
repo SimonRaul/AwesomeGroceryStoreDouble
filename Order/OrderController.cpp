@@ -34,7 +34,7 @@ namespace controller {
     orderRepo.addOrder(order);
   }
 
-  bool OrderController::updateOrder(int orderNumber, const std::vector<std::pair<Product::Product, int>>& newProducts) {
+  bool OrderController::updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts) {
     return orderRepo.updateOrder(orderNumber, newProducts);
   }
 
@@ -46,7 +46,7 @@ namespace controller {
     return orderRepo.assignEmployeeIfUnassigned(orderNumber, employee);
   }
 
-  bool OrderController::createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product::Product, int>>& products) {
+  bool OrderController::createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products) {
     return orderRepo.createReservation(customer, orderNumber, products);
   }
 

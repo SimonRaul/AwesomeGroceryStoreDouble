@@ -10,6 +10,7 @@
 #include <vector>
 
 using namespace Customer_Domain;
+using namespace productdomain;
 
 namespace domain {
 
@@ -24,7 +25,7 @@ class OrderDomain {
     int number;
     std::tm date;
     OrderStatus status;
-    std::vector<std::pair<Product::Product, int>> products;
+    std::vector<std::pair<Product, int>> products;
     Customer customer;
     employeedomain::Employee employee;
     double totalprice;
@@ -36,7 +37,7 @@ class OrderDomain {
     int getNumber() const;
     std::tm getDate() const;
     OrderStatus getStatus() const;
-    std::vector<std::pair<Product::Product, int>> getProducts() const;
+    std::vector<std::pair<Product, int>> getProducts() const;
     double getTotalPrice() const;
     employeedomain::Employee getEmployee() const;
 
@@ -48,7 +49,7 @@ class OrderDomain {
     void setEmployee(const employeedomain::Employee& newemployee);
 
     //setter method for changing the list of products
-    void setProducts(const std::vector<std::pair<Product::Product, int>>& newproducts);
+    void setProducts(const std::vector<std::pair<Product, int>>& newproducts);
 
 
     //methods for employee
@@ -56,13 +57,13 @@ class OrderDomain {
     void changeStatus(OrderStatus newStatus);
 
     //changes the list of products to a new list
-    void changeOrder(const std::vector<std::pair<Product::Product, int>>& newProducts);
+    void changeOrder(const std::vector<std::pair<Product, int>>& newProducts);
 
     //calculates the total price
     void calculateTotalPrice();
 
     //creates an "Reservation" order, that doesn't have an assigned employee
-    void createReservation(const Customer& customer, const std::vector<std::pair<Product::Product, int>>& products);
+    void createReservation(const Customer& customer, const std::vector<std::pair<Product, int>>& products);
 
 
 };

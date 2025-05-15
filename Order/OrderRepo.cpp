@@ -1,4 +1,4 @@
-#include "OrderDomain.h"
+#include "../Order/OrderDomain.h"
 #include "../Product/Domain/Product.h"
 #include "../Customer/Domain/Customer.h"
 #include "../Employee/Domain/Employee.h"
@@ -83,7 +83,7 @@ namespace repository {
         orders.push_back(order);
     }
 
-    bool OrderRepo::updateOrder(int orderNumber, const std::vector<std::pair<Product::Product, int>>& newProducts) {
+    bool OrderRepo::updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts) {
         for (auto& order : orders) {
             if (order.getNumber() == orderNumber) {
                 if (order.getStatus() == OrderStatus::Completed) {
@@ -136,7 +136,7 @@ namespace repository {
     }
 
     bool OrderRepo::createReservation(const Customer_Domain::Customer& customer, int orderNumber,
-        const std::vector<std::pair<Product::Product, int>>& products) {
+        const std::vector<std::pair<Product, int>>& products) {
 
         if (!isOrderNumberUnique(orderNumber)) {
             std::cerr << "Order number already exists.\n";

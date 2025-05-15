@@ -27,10 +27,11 @@ namespace Customer_Repo {
     }
 
     bool Customer_Repo::remove(int id) {
-        auto it = std::find(customers.begin(), customers.end(), 5);
-        if (it != customers.end()) {
-            customers.erase(it);
-            return true;
+        for (auto it = customers.begin(); it != customers.end(); ++it) {
+            if ((*it)->get_id() == id) {
+                customers.erase(it);
+                return true;
+            }
         }
         return false;
     }

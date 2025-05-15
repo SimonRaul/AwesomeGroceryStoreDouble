@@ -34,7 +34,7 @@ OrderStatus OrderDomain::getStatus() const {
   return this->status;
 }
 
-std::vector<std::pair<Product::Product, int>> OrderDomain::getProducts() const {
+std::vector<std::pair<Product, int>> OrderDomain::getProducts() const {
   return this->products;
 }
 
@@ -54,7 +54,7 @@ void OrderDomain::setEmployee(const employeedomain::Employee& newemployee) {
   this->employee = newemployee;
 }
 
-void OrderDomain::setProducts(const std::vector<std::pair<Product::Product, int>>& newproducts) {
+void OrderDomain::setProducts(const std::vector<std::pair<Product, int>>& newproducts) {
     this->products = newproducts;
 }
 
@@ -62,7 +62,7 @@ void OrderDomain::changeStatus(OrderStatus newstatus) {
   setStatus(newstatus);
 }
 
-void OrderDomain::changeOrder(const std::vector<std::pair<Product::Product, int>>& newProducts) {
+void OrderDomain::changeOrder(const std::vector<std::pair<Product, int>>& newProducts) {
   setProducts(newProducts);
   calculateTotalPrice();
 }
@@ -70,13 +70,13 @@ void OrderDomain::changeOrder(const std::vector<std::pair<Product::Product, int>
 void OrderDomain::calculateTotalPrice() {
 	totalprice = 0.0;
     for (const auto& item : products) {
-        const Product::Product& product = item.first;
+        const Product& product = item.first;
         int quantity = item.second;
         totalprice += product.Price * quantity;
     }
 }
 
-void OrderDomain::createReservation(const Customer& customer, const std::vector<std::pair<Product::Product, int>>& products) {
+void OrderDomain::createReservation(const Customer& customer, const std::vector<std::pair<Product, int>>& products) {
 	this->customer = customer;
     this->products = products;
     this->status = OrderStatus::Reservation;
