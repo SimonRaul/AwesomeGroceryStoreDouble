@@ -1,5 +1,5 @@
 #include "OrderDomain.h"
-#include "../Product/Product.h"
+#include "../Product/Domain/Product.h"
 #include "../Customer/Domain/Customer.h"
 #include "../Employee/Domain/Employee.h"
 
@@ -11,6 +11,10 @@
 using namespace domain;
 
 namespace repository {
+
+    OrderRepo::OrderRepo(std::vector<domain::OrderDomain> orders) {
+      this->orders = orders;
+    }
 
     const std::vector<domain::OrderDomain>& OrderRepo::getOrders() {
         return orders;

@@ -1,7 +1,7 @@
 #ifndef ORDERDOMAIN_H
 #define ORDERDOMAIN_H
 
-#include "../Product/Product.h"
+#include "../Product/Domain/Product.h"
 #include "../Customer/Domain/Customer.h"
 #include "../Employee/Domain/Employee.h"
 
