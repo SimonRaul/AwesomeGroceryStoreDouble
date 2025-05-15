@@ -59,3 +59,41 @@ bool UserController::is_logged_in() {
     return false;
 }
 
+bool UserController::update_password(string introduced_email, string old_password, string new_password) {
+    string email, password, role;
+    vector<string> updated_lines;
+
+    bool changed = false;
+    ifstream file("Accounts");
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        getline(ss, email, ':');
+        getline(ss, password, ':');
+        getline(ss, role);
+        if (introduced_email == email && old_password == password) {
+            changed = true;
+            password = new_password;
+            updated_lines.push_back(email + ":" + password + ":" + role);
+        }
+        else {
+            updated_lines.push_back(email + ":" + password + ":" + role);
+        }
+    }
+
+    file.close();
+    ofstream out_file("Accounts");
+
+    for (const auto& updatedLine : updated_lines) {
+        out_file << updatedLine << '\n';
+    }
+    out_file.close();
+
+    if (!changed) {
+        cout << "The email or old password are wrong, please try again!" << endl;
+    }
+
+    return changed;
+}
+
+

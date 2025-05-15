@@ -26,7 +26,7 @@ namespace usercontroller {
         //login related methods
         void login(string introduced_email, string introduced_password);
         bool is_logged_in();
-        bool update_password(string email, string password);
+        bool update_password(string introduced_email, string old_password, string new_password);
     };
 }
 
