@@ -29,4 +29,10 @@ add_executable(AwesomeGroceryStoreDouble main.cpp
         Data/Repo/Customer_Repo.h
         Data/Repo/Customer_Repo.cpp
         Data/Repo/IRepo.h
-        Presentation/UI/IPresentation.h)
+        Presentation/UI/IPresentation.h
+        Presentation/UI/Customer_UI.h
+        Presentation/UI/EmployeeUI.h
+        Presentation/UI/EmployeeUI.cpp
+        Presentation/UI/Customer_UI.cpp
+        Service/Controller/ProductController.h
+        Service/Controller/ProductController.cpp)
