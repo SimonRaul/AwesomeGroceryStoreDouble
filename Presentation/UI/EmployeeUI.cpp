@@ -19,3 +19,16 @@ std::string EmployeeUI::account_menu() {
 std::string EmployeeUI::user_menu() {
     return "Choose an option:\n1 - List clients\n2 - Edit client by ID\n3 - Add client\n4 - Remove client\n5 - Back\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
 }
+
+void EmployeeUI::create_instance() {
+    return;
+}
+
+void EmployeeUI::remove_instance() {
+    return;
+}
+
+void EmployeeUI::update_instance() {
+    return;
+}
+

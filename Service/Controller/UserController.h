@@ -27,6 +27,14 @@ namespace usercontroller {
         void login(string introduced_email, string introduced_password);
         bool is_logged_in();
         bool update_password(string introduced_email, string old_password, string new_password);
+
+        //getters & setters
+        unique_ptr<User> get_current_user();
+        template<typename Entity>
+        void set_current_user(Entity& user);
+
+        bool create_account(const string &name, const string &forename,
+        const string &introduced_email, const string &introduced_password, const string &address);
     };
 }
 

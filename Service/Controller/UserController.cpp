@@ -96,4 +96,41 @@ bool UserController::update_password(string introduced_email, string old_passwor
     return changed;
 }
 
+unique_ptr<User> UserController::get_current_user() {
+    return move(current_user);
+}
+
+template<typename Entity>
+void UserController::set_current_user(Entity& user) {
+    current_user = make_unique<Entity>(user);
+}
+
+bool UserController::create_account(const string &name, const string &forename,
+        const string &introduced_email, const string &introduced_password, const string &address) {
+    string email, password, role;
+    vector<string> initial_lines;
+
+    ifstream file("Accounts");
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        getline(ss, email, ':');
+        getline(ss, password, ':');
+        getline(ss, role);
+        initial_lines.push_back(email + ":" + password + ":" + role);
+    }
+    file.close();
+
+    shared_ptr<Customer> new_cus = cus_repo.create(name, forename, introduced_email, introduced_password, address);
+
+    initial_lines.push_back(introduced_email + ":" + introduced_password + ":" + "client");
+
+    ofstream out_file("Accounts");
+    for (const auto& updatedLine : initial_lines) {
+        out_file << updatedLine << '\n';
+    }
+    out_file.close();
+
+    return true;
+}
 

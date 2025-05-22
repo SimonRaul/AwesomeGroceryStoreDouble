@@ -7,3 +7,16 @@ std::string Customer_UI::main_menu() {
     return "Choose an option:\n1 - Change Password\n2 - Reserve Product\n3 - See orders\n4 - See order status (by order ID)\n5 - Exit\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
 
 }
+
+void Customer_UI::create_instance() {
+    return;
+}
+
+void Customer_UI::remove_instance() {
+    return;
+}
+
+void Customer_UI::update_instance() {
+    return;
+}
+

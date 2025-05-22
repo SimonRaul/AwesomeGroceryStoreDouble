@@ -7,27 +7,84 @@
 
 using namespace basicUI;
 
-//Displays the message that appears at the start of the program
-string BasicUI::display_start_message() {
-    return "╔════════════════════════════════════════════════════════════╗\n"
-           "║         Welcome to the AWESOME GROCERY STORE 2!           ║\n"
-           "╚════════════════════════════════════════════════════════════╝\n"
-           "Please insert your name and forename!\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
+BasicUI::BasicUI() {
+    pair<string, string> names = insert_name_and_forename();
+    name = names.first;
+    forename = names.second;
+    user_crt = UserController (name, forename);
 }
 
+//Displays the message that appears at the start of the program
+string BasicUI::display_start_message() {
+    string start_message = "+============================================================+\n"
+                       "|   Welcome " + name + " " + forename + " to the AWESOME GROCERY STORE 2!       |\n"
+                       "+============================================================+\n";
+
+    return start_message;
+}
+
+
 //Method to set the name and forename of the new user
-void BasicUI::insert_informations() {
+pair<string,string> BasicUI::insert_name_and_forename() {
     string name, forename;
+    cout << "Plesase insert your name and forename" << endl;
     cout << "name: " << endl;
     cin >> name;
+    cout << endl;
     cout << "forename: " << endl;
     cin >> forename;
-    new_user.set_name(name);
-    new_user.set_forename(forename);
+    cout << endl;
+
+    return {name, forename};
+    // user_crt.set_name(name);
+    // new_user.set_forename(forename);
 }
 
 //Displays the main menu
 string BasicUI::dispaly_main_menu() {
     return "1 - Create an account\n"
-            "2 - Log in\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
+            "2 - Log in\n------------------- * * * -------------------\n";
+}
+
+pair<string,string> BasicUI::insert_email_and_password() {
+    string email, password;
+    cout << "Email: " << endl;
+    cin >> email;
+    cout << endl;
+    cout << "Password: " << endl;
+    cin >> password;
+    cout << endl;
+    return {email,password};
+}
+
+
+void BasicUI::run_program() {
+    cout << display_start_message();
+    // insert_name_and_forename();
+    cout << dispaly_main_menu();
+    int option;
+    cout << "Option: ";
+    cin >> option;
+    cout << endl;
+    if (option == 1) {
+        return;
+    }
+    if (option == 2) {
+        pair<string,string> email_and_password= insert_email_and_password();
+        user_crt.login(email_and_password.first, email_and_password.second);
+        auto raw_ptr = user_crt.get_current_user().get();
+
+        if (!raw_ptr) {
+            throw runtime_error("No user is currently logged in.");
+        }
+
+        if (dynamic_cast<Employee*>(raw_ptr)) {
+            // It's an Employee
+        } else if (dynamic_cast<Customer*>(raw_ptr)) {
+            // It's a Customer
+        }
+        else {
+            throw runtime_error("Logged-in user is of unknown type.");
+        }
+    }
 }
