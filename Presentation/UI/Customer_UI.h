@@ -11,8 +11,15 @@
 
 class Customer_UI: public IPresentation {
 public:
+    Customer_UI() = default;
+
     std::string main_menu() override;
 
+    void create_instance() override;
+
+    void remove_instance() override;
+
+    void update_instance() override;
 };
 
 

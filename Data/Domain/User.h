@@ -18,6 +18,9 @@ namespace userdomain {
         string password;
 
     public:
+
+        virtual ~User() = default;
+
         //Constructor
         User(string name = "", string forename = "", string email = "", string password = "");
 

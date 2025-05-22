@@ -6,28 +6,35 @@
 #define BASICUI_H
 
 #include <string>
-#include "../../Data/Domain/User.h"
+#include "../../Service/Controller//UserController.h"
+#include "Customer_UI.h"
+#include "EmployeeUI.h"
 
 using namespace std;
 using namespace userdomain;
+using namespace usercontroller;
 
 namespace basicUI {
     class BasicUI {
     private:
-        User new_user;
+        string name, forename;
+        Customer_UI cus_ui;
+        EmployeeUI emp_ui;
+        UserController user_crt{ name, forename };
     public:
         //Constructor
-        BasicUI() = default;
+        BasicUI();
 
         //Messages
         string display_start_message();
         string dispaly_main_menu();
 
         //Method to set the name and forename of the new user
-        void insert_informations();
+        pair<string,string> insert_name_and_forename();
+        pair<string,string> insert_email_and_password();
 
         //Run method
-        void run();
+        void run_program();
     };
 }
 

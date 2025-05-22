@@ -18,6 +18,12 @@ public:
     std::string account_menu();
 
     std::string user_menu();
+
+    void create_instance() override;
+
+    void remove_instance() override;
+
+    void update_instance() override;
 };
 
 
