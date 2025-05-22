@@ -12,7 +12,7 @@ using namespace employeerepo;
 
 //Constructor implementation
 UserController::UserController(string name, string forename)
-    : current_user(new User(name, forename)){}
+    : current_user(new User(name, forename)), cus_repo(Customer_Repo::Customer_Repo("clients.txt")){}
 
 //Login method implementation
 void UserController::login(string introduced_email, string introduced_password) {
@@ -24,7 +24,7 @@ void UserController::login(string introduced_email, string introduced_password) 
         if (introduced_email == email && introduced_password == password) {
             if (role ==  "employee") {
                 try {
-                    Employee emp = emp_repo.find_employee_by_email(email);
+                    Employee emp = emp_repo.find_by_email(email);
                     current_user = make_unique<Employee>(emp);
                     cout << "Logged in as an Employee" << endl;
                 } catch (const exception& e) {
@@ -33,7 +33,7 @@ void UserController::login(string introduced_email, string introduced_password) 
             }
             if (role == "client") {
                 try {
-                    Customer cli = cus_repo.find_client_by_email(email);
+                    Customer cli = cus_repo.find_by_email(email);
                     current_user = make_unique<Customer>(cli);
                     cout << "Logged in as Customer" << endl;
                 } catch (const exception& e) {

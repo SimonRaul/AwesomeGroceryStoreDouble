@@ -23,10 +23,16 @@ namespace Customer_Repo {
         int nextId = 1; // id overlaps between customers and employees
 
     public:
+
+        explicit Customer_Repo(const string& filename);
+
         shared_ptr<Customer> create(const string& name, const string& forename,
                                     const string& email, const string& password,
                                     const string& address);
 
+        shared_ptr<Customer> create_with_id(const int& id, const string& name, const string& forename,
+                                    const string& email, const string& password,
+                                    const string& address);
         bool update(int id, const string& address);
 
         bool remove(int id) override;
