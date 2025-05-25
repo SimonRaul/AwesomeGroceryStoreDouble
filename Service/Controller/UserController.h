@@ -29,7 +29,7 @@ namespace usercontroller {
         bool update_password(string introduced_email, string old_password, string new_password);
 
         //getters & setters
-        unique_ptr<User> get_current_user();
+        User* get_current_user();
         template<typename Entity>
         void set_current_user(Entity& user);
 

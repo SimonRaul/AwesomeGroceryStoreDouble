@@ -5,6 +5,8 @@
 #include <string>
 #include <fstream>
 
+#include "../../Data/Repo/Customer_Repo.h"
+
 using namespace std;
 
 #ifndef CLIENTMANAGEMENTCONTROLLER_H
@@ -13,6 +15,8 @@ using namespace std;
 namespace controller {
 
 class ClientManagementController {
+private:
+    Customer_Repo::Customer_Repo cus_repo;
   public:
     void gdprAnonymize(const string &email);
 };
