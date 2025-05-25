@@ -12,7 +12,7 @@ using namespace employeerepo;
 
 //Constructor implementation
 UserController::UserController(string name, string forename)
-    : current_user(new User(name, forename)), cus_repo(Customer_Repo::Customer_Repo("clients.txt")){}
+    : current_user(new User(name, forename)), cus_repo(Customer_Repo::Customer_Repo("clients.txt")), emp_repo(EmployeeRepository("employees.txt")){}
 
 //Login method implementation
 void UserController::login(string introduced_email, string introduced_password) {
@@ -36,8 +36,8 @@ void UserController::login(string introduced_email, string introduced_password) 
                     Customer cli = cus_repo.find_by_email(email);
                     current_user = make_unique<Customer>(cli);
                     cout << "Logged in as Customer" << endl;
-                } catch (const exception& e) {
-                    cerr << "Customer login error: " << e.what() << endl;
+                    } catch (const exception& e) {
+                cerr << "Customer login error: " << e.what() << endl;
                 }
             }
             file.close();
@@ -96,8 +96,8 @@ bool UserController::update_password(string introduced_email, string old_passwor
     return changed;
 }
 
-unique_ptr<User> UserController::get_current_user() {
-    return move(current_user);
+User* UserController::get_current_user() {
+    return current_user.get();
 }
 
 template<typename Entity>

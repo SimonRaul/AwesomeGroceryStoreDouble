@@ -72,19 +72,19 @@ void BasicUI::run_program() {
     if (option == 2) {
         pair<string,string> email_and_password= insert_email_and_password();
         user_crt.login(email_and_password.first, email_and_password.second);
-        auto raw_ptr = user_crt.get_current_user().get();
+        auto raw_ptr = user_crt.get_current_user();
 
         if (!raw_ptr) {
             throw runtime_error("No user is currently logged in.");
         }
 
         if (dynamic_cast<Employee*>(raw_ptr)) {
-            // It's an Employee
+            cout<< raw_ptr->get_name()<< endl;
         } else if (dynamic_cast<Customer*>(raw_ptr)) {
-            // It's a Customer
+           cout<< raw_ptr->get_name()<< endl;
         }
-        else {
-            throw runtime_error("Logged-in user is of unknown type.");
-        }
+        // else {
+        //     throw runtime_error("Logged-in user is of unknown type.");
+        // }
     }
 }
