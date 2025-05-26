@@ -20,7 +20,8 @@ namespace basicUI {
         string name, forename;
         Customer_UI cus_ui;
         EmployeeUI emp_ui;
-        UserController user_crt{ name, forename };
+        UserController user_crt{ name, forename, "Accounts",
+            "clients.txt", "employees.txt"};
     public:
         //Constructor
         BasicUI();

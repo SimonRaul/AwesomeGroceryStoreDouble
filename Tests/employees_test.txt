@@ -1,0 +1,2 @@
+1:Petrescu:Ana:ana.petrescu@groceryco.com:fructe123:Cashier:1996-05-21:3200.00
+2:Ionescu:Matei:matei.ionescu@groceryco.com:paine456:Stock Clerk:1998-08-10:3000.50

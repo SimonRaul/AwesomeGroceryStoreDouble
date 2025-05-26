@@ -11,7 +11,7 @@ BasicUI::BasicUI() {
     pair<string, string> names = insert_name_and_forename();
     name = names.first;
     forename = names.second;
-    user_crt = UserController (name, forename);
+    user_crt = UserController (name, forename,"Accounts", "clients.txt", "employees.txt");
 }
 
 //Displays the message that appears at the start of the program
