@@ -24,6 +24,7 @@ public:
         return static_cast<Derived*>(this)->update(forward<Args>(args)...);
     }
 
+    virtual vector<shared_ptr<Entity>> list() = 0;
     virtual bool remove(int arg) = 0;
     virtual Entity find_by_email(const string& arg) = 0;
 };

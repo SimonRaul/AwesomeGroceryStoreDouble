@@ -91,4 +91,9 @@ namespace Customer_Repo {
         throw runtime_error("Customer not found");
     }
 
+    vector<shared_ptr<Customer>> Customer_Repo::list()
+    {
+        return customers;
+    }
+
 }

@@ -28,7 +28,9 @@ namespace productrepo {
         bool update(const std::string& id, const std::string& name, float price, float quantity);
         bool remove(int id) override;
         
-        std::vector<std::shared_ptr<Product>> listProducts();
+        std::vector<std::shared_ptr<Product>> list() override;
+
+        Product find_by_email(const string& arg) override;
     };
 }
 

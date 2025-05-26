@@ -8,24 +8,24 @@ using namespace productcontroller;
 using namespace productrepo;
 using namespace productdomain;
 
-ProductController::ProductController(std::shared_ptr<ProductRepository> productRepo) 
-    : productRepository(productRepo) {
+ProductController::ProductController(const std::string& filename)
+    : productRepository(ProductRepository(filename)) {
 }
 
 void ProductController::addProduct(const std::string& name, float price, float quantity) {
-    productRepository->create(name, price, quantity);
+    productRepository.create(name, price, quantity);
 }
 
 std::vector<std::shared_ptr<Product>> ProductController::listProducts() {
-    return productRepository->listProducts();
+    return productRepository.list();
 }
 
 bool ProductController::removeProduct(int id) {
-    return productRepository->remove(id);
+    return productRepository.remove(id);
 }
 
 bool ProductController::updateProduct(const std::string& id, const std::string& name, float price, float quantity) {
-    return productRepository->update(id, name, price, quantity);
+    return productRepository.update(id, name, price, quantity);
 }
 
 
