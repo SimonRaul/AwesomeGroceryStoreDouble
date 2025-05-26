@@ -4,7 +4,8 @@
 namespace controller {
 
   //constructor
-  OrderController::OrderController(repository::OrderRepo& orderRepo) : orderRepo(orderRepo) {}
+  OrderController::OrderController(const std::string& filename) : orderRepo(repository::OrderRepo(filename)) {
+  }
 
   const std::vector<domain::OrderDomain>& OrderController::getOrders() {
     return orderRepo.getOrders();

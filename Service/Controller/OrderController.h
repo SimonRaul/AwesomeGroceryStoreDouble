@@ -10,7 +10,7 @@ namespace controller {
         repository::OrderRepo orderRepo;
 
        public:
-         OrderController(repository::OrderRepo& orderRepo);
+         OrderController(const std::string& filename);
 
         const std::vector<domain::OrderDomain>& getOrders();
 
