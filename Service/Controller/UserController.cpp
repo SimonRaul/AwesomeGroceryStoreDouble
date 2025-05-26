@@ -11,14 +11,18 @@ using namespace std;
 using namespace employeerepo;
 
 //Constructor implementation
-UserController::UserController(string name, string forename)
-    : current_user(new User(name, forename)), cus_repo(Customer_Repo::Customer_Repo("clients.txt")), emp_repo(EmployeeRepository("employees.txt")){}
+UserController::UserController(const string& name, const string& forename,
+            const string& accounts_file, const string& clients_file, const string& employees_file)
+    : current_user(new User(name, forename)),
+cus_repo(Customer_Repo::Customer_Repo(clients_file)),
+emp_repo(EmployeeRepository(employees_file)),
+accounts_file(accounts_file), clients_file(clients_file), employees_file(employees_file){}
 
 //Login method implementation
 void UserController::login(string introduced_email, string introduced_password) {
     string email, password, role;
 
-    ifstream file("Accounts");
+    ifstream file(accounts_file);
     while (getline(file, email, ':') && getline(file, password, ':')
         && getline(file, role)) {
         if (introduced_email == email && introduced_password == password) {
@@ -51,7 +55,7 @@ void UserController::login(string introduced_email, string introduced_password) 
 
 //verifies if the current user is logged in or not
 bool UserController::is_logged_in() {
-    if (current_user != nullptr) {
+    if (current_user->get_email() != "") {
         cout << "You are allready logged in." << endl;
         return true;
     }
@@ -64,7 +68,7 @@ bool UserController::update_password(string introduced_email, string old_passwor
     vector<string> updated_lines;
 
     bool changed = false;
-    ifstream file("Accounts");
+    ifstream file(accounts_file);
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
@@ -82,7 +86,7 @@ bool UserController::update_password(string introduced_email, string old_passwor
     }
 
     file.close();
-    ofstream out_file("Accounts");
+    ofstream out_file(accounts_file);
 
     for (const auto& updatedLine : updated_lines) {
         out_file << updatedLine << '\n';
@@ -110,7 +114,7 @@ bool UserController::create_account(const string &name, const string &forename,
     string email, password, role;
     vector<string> initial_lines;
 
-    ifstream file("Accounts");
+    ifstream file(accounts_file);
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
@@ -125,7 +129,7 @@ bool UserController::create_account(const string &name, const string &forename,
 
     initial_lines.push_back(introduced_email + ":" + introduced_password + ":" + "client");
 
-    ofstream out_file("Accounts");
+    ofstream out_file(accounts_file);
     for (const auto& updatedLine : initial_lines) {
         out_file << updatedLine << '\n';
     }

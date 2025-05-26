@@ -16,12 +16,16 @@ using namespace userdomain;
 namespace usercontroller {
     class UserController {
     private:
+        string accounts_file;
+        string clients_file;
+        string employees_file;
         employeerepo::EmployeeRepository emp_repo;
         Customer_Repo::Customer_Repo cus_repo;
         unique_ptr<User> current_user = nullptr;
     public:
         //Constructor
-        UserController(string name, string forename);
+        UserController(const string& name, const string& forename,
+            const string& accounts_file, const string& clients_file, const string& employees_file);
 
         //login related methods
         void login(string introduced_email, string introduced_password);
