@@ -38,6 +38,7 @@ namespace Customer_Repo {
         bool remove(int id) override;
 
         Customer find_by_email(const string &email) override;
+        vector<shared_ptr<Customer>> list() override;
     };
 }
 

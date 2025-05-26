@@ -72,7 +72,7 @@ void OrderDomain::calculateTotalPrice() {
     for (const auto& item : products) {
         const Product& product = item.first;
         int quantity = item.second;
-        totalprice += product.Price * quantity;
+        totalprice += product.get_price() * quantity;
     }
 }
 

@@ -11,9 +11,9 @@ using namespace productdomain;
 namespace productcontroller {
     class ProductController {
     private:
-        std::shared_ptr<ProductRepository> productRepository;
+        ProductRepository productRepository;
     public:
-        explicit ProductController(std::shared_ptr<ProductRepository> productRepo);
+        explicit ProductController(const std::string& filename);
         void addProduct(const std::string& name, float price, float quantity);
         std::vector<std::shared_ptr<Product>> listProducts();
         bool removeProduct(int id);

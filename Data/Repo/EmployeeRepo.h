@@ -58,6 +58,7 @@ namespace employeerepo {
 		bool remove(int id) override;
 
 		Employee find_by_email(const string& email) override;
+		vector<shared_ptr<Employee>> list() override;
 	};
 
 }

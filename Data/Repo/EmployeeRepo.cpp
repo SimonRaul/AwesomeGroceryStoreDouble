@@ -96,5 +96,10 @@ namespace employeerepo {
 		throw runtime_error("Customer not found");
 	}
 
+	vector<shared_ptr<Employee>> EmployeeRepository::list()
+	{
+		return employees;
+	}
+
 
 }

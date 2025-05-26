@@ -19,7 +19,7 @@ namespace productrepo {
             std::stringstream ss(line);
             std::string token;
 
-            while (std::getline(ss, token, ';')) {
+            while (std::getline(ss, token, ':')) {
                 tokens.push_back(token);
             }
 
@@ -98,8 +98,14 @@ namespace productrepo {
 
     
 
-    std::vector<std::shared_ptr<Product>> ProductRepository::listProducts() {
+    std::vector<std::shared_ptr<Product>> ProductRepository::list() {
         return products;
     }
+
+    Product ProductRepository::find_by_email(const string& arg)
+    {
+        return Product("",0,0,0);
+    }
+
 }
 
