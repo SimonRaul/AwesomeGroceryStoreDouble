@@ -1,24 +1,35 @@
-
 #ifndef PRODUCTREPOSITORY_H
 #define PRODUCTREPOSITORY_H
 #include <vector>
+#include <memory>
+#include <fstream>
+#include <sstream>
+
+#include "IRepo.h"
 #include "../Domain/Product.h"
 
 using namespace productdomain;
 
-namespace productrepo
-{
-    class ProductRepository {
+namespace productrepo {
+    class ProductRepository : public IRepo<ProductRepository, Product> {
     private:
-        std::vector<Product> Products;
+        std::vector<std::shared_ptr<Product>> products;
+        std::string filename;
 
     public:
-        ProductRepository();
-        ProductRepository(std::vector<Product> products);
-        bool addProduct(Product product);
-        std::vector<Product> listProducts();
+        explicit ProductRepository(const std::string& filename);
+        
+        static std::vector<std::vector<std::string>> readFileSplitByColon(const std::string& filename);
+        void writeToFile();
+        
+        std::shared_ptr<Product> create(const std::string& name, float price, float quantity);
+        std::shared_ptr<Product> create_with_id(const std::string& id, const std::string& name, float price, float quantity);
+        
+        bool update(const std::string& id, const std::string& name, float price, float quantity);
+        bool remove(int id) override;
+        
+        std::vector<std::shared_ptr<Product>> listProducts();
     };
 }
-
 
 #endif //PRODUCTREPOSITORY_H
