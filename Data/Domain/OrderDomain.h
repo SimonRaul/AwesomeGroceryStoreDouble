@@ -62,7 +62,7 @@ class OrderDomain {
     //calculates the total price
     void calculateTotalPrice();
 
-    //creates an "Reservation" order, that doesn't have an assigned employee
+    //creates a "Reservation" order, that doesn't have an assigned employee
     void createReservation(const Customer& customer, const std::vector<std::pair<Product, int>>& products);
 
 
