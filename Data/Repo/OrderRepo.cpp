@@ -246,7 +246,6 @@ namespace repository {
         orders.push_back(newOrder);
         return true;
     }
-
 }
 
 

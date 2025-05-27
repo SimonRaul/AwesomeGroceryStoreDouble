@@ -44,7 +44,6 @@ namespace controller {
         //creates a reservation
         bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products);
     };
-
 }
 
 #endif //ORDERCONTROLLER_H
