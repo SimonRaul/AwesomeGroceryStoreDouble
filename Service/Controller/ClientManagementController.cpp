@@ -72,7 +72,7 @@ vector<shared_ptr<Customer>> ClientManagementController::listByProduct(const Pro
     const vector<OrderDomain>& orders = order_repo.getOrders();
 
     for (const auto& order : orders) {
-        const vector<pair<Product, int>>& orderProducts = order.getProducts();
+        const vector<pair<Product, float>>& orderProducts = order.getProducts();
         
         for (const auto& orderProduct : orderProducts) {
             if (orderProduct.first.get_id() == product.get_id()) {

@@ -6,7 +6,7 @@
 #define BASICUI_H
 
 #include <string>
-#include "../../Service/Controller//UserController.h"
+#include "../../Service/Controller/UserController.h"
 #include "Customer_UI.h"
 #include "EmployeeUI.h"
 
@@ -20,7 +20,7 @@ namespace basicUI {
         friend class EmployeeUI;
     private:
         string name, forename;
-        Customer_UI cus_ui;
+        Customer_UI cus_ui{"clients.txt", "products.txt", "orders.txt"};
         EmployeeUI emp_ui;
         UserController user_crt{ name, forename, "Accounts",
             "clients.txt", "employees.txt"};

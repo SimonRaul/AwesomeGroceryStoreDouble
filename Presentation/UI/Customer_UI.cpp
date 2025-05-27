@@ -7,7 +7,7 @@
 // #include <typeinfo>
 
 #include "../../Service/Controller/ProductController.h"
-Customer_UI::Customer_UI(const std::string& cus_file, std::string& prod_file, std::string& order_file) :cus_repo(cus_file), product_cont(prod_file), order_cont(order_file){}
+Customer_UI::Customer_UI(const std::string& cus_file, const std::string& prod_file, const std::string& order_file) :cus_repo(cus_file), product_cont(prod_file), order_cont(controller::OrderController(order_file, product_cont)){}
 
 std::string Customer_UI::main_menu() {
     return "Choose an option:\n1 - Change Password\n2 - Reserve Product\n3 - See Products\n4 - See orders\n5 - See order status (by order ID)\n6 - Exit\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";

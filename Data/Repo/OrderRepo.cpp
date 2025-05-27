@@ -59,7 +59,7 @@ namespace repository {
         else if (tokens[2] == "Completed") status = OrderStatus::Completed;
         else continue;
 
-        vector<pair<Product, int>> products;
+        vector<pair<Product, float>> products;
         stringstream ss_products(tokens[3]);
         string prod_entry;
         while (getline(ss_products, prod_entry, '|')) {
@@ -173,7 +173,7 @@ namespace repository {
         orders.push_back(order);
     }
 
-    bool OrderRepo::updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts) {
+    bool OrderRepo::updateOrder(int orderNumber, const std::vector<std::pair<Product, float>>& newProducts) {
         for (auto& order : orders) {
             if (order.getNumber() == orderNumber) {
                 if (order.getStatus() == OrderStatus::Completed) {
@@ -225,7 +225,7 @@ namespace repository {
         return false;
     }
 
-    bool OrderRepo::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, int>>& products) {
+    bool OrderRepo::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, float>>& products) {
 
         if (products.empty()) {
             std::cerr << "Cannot create reservation with empty product list.\n";
