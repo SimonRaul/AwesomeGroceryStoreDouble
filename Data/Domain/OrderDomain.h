@@ -40,6 +40,7 @@ class OrderDomain {
     std::vector<std::pair<Product, int>> getProducts() const;
     double getTotalPrice() const;
     employeedomain::Employee getEmployee() const;
+    Customer getCustomer() const;
 
     //setter methods
     //setter method for changing status between Reservation, Confirmed and Completed

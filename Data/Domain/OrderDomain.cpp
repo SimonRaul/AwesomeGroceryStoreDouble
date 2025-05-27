@@ -85,4 +85,9 @@ void OrderDomain::createReservation(const Customer& customer, const std::vector<
     calculateTotalPrice();
 }
 
+Customer OrderDomain::getCustomer() const
+{
+  return this->customer;
+}
+
 }
