@@ -67,7 +67,13 @@ void BasicUI::run_program() {
     cin >> option;
     cout << endl;
     if (option == 1) {
-        return;
+        pair<string,string> name_forename = insert_name_and_forename();
+        pair<string, string> email_password = insert_email_and_password();
+        string address;
+        cout << "Address: " << endl;
+        cin>> address;
+        user_crt.create_account(name_forename.first, name_forename.second,
+            email_password.first, email_password.second, address);
     }
     if (option == 2) {
         pair<string,string> email_and_password= insert_email_and_password();
@@ -81,7 +87,7 @@ void BasicUI::run_program() {
         if (dynamic_cast<Employee*>(raw_ptr)) {
             // emp_ui.run();
         } else if (dynamic_cast<Customer*>(raw_ptr)) {
-           // cus_ui.run();
+           cus_ui.run(dynamic_cast<Customer*>(raw_ptr));
         }
     }
 }
