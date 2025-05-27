@@ -47,8 +47,8 @@ namespace controller {
     return orderRepo.assignEmployeeIfUnassigned(orderNumber, employee);
   }
 
-  bool OrderController::createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products) {
-    return orderRepo.createReservation(customer, orderNumber, products);
+  bool OrderController::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, int>>& products) {
+    return orderRepo.createReservation(customer, products);
   }
 
 

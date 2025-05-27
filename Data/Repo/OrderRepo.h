@@ -51,7 +51,7 @@ class OrderRepo {
   bool assignEmployeeIfUnassigned(int orderNumber, const employeedomain::Employee& employee);
 
   //creates a reservation
-  bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products);
+  bool createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, int>>& products);   //change ordderNumber logic
 
 };
 

@@ -225,21 +225,24 @@ namespace repository {
         return false;
     }
 
-    bool OrderRepo::createReservation(const Customer_Domain::Customer& customer, int orderNumber,
-        const std::vector<std::pair<Product, int>>& products) {
-
-        if (!isOrderNumberUnique(orderNumber)) {
-            std::cerr << "Order number already exists.\n";
-            return false;
-        }
+    bool OrderRepo::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, int>>& products) {
 
         if (products.empty()) {
             std::cerr << "Cannot create reservation with empty product list.\n";
             return false;
         }
 
+        int max_order_number = 0;
+        for (const auto& order : orders) {
+            if (order.getNumber() > max_order_number) {
+                max_order_number = order.getNumber();
+            }
+        }
+
+        int new_order_number = max_order_number + 1;
+
         std::tm now = {};
-        OrderDomain newOrder(orderNumber, now, OrderStatus::Reservation, customer, employeedomain::Employee());
+        OrderDomain newOrder(new_order_number, now, OrderStatus::Reservation, customer, employeedomain::Employee());
         newOrder.setProducts(products);
         newOrder.calculateTotalPrice();
 
