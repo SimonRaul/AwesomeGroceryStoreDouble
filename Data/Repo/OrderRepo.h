@@ -42,7 +42,7 @@ class OrderRepo {
   void addOrder(const domain::OrderDomain& order);
 
   //Updates the list of products in an order
-  bool updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts);
+  bool updateOrder(int orderNumber, const std::vector<std::pair<Product, float>>& newProducts);
 
   //Changes the status of an order (unless it's already "Completed")
   bool setOrderStatus(int orderNumber, domain::OrderStatus newStatus);
@@ -51,7 +51,7 @@ class OrderRepo {
   bool assignEmployeeIfUnassigned(int orderNumber, const employeedomain::Employee& employee);
 
   //creates a reservation
-  bool createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, int>>& products);   //change ordderNumber logic
+  bool createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, float>>& products);   //change ordderNumber logic
 
 };
 

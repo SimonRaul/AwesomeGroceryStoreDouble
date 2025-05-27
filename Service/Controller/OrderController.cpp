@@ -4,8 +4,8 @@
 namespace controller {
 
   //constructor
-  OrderController::OrderController(const std::string& filename) : orderRepo(repository::OrderRepo(filename)) {
-  }
+  OrderController::OrderController(const std::string& filename, const ProductController& prod_contr) :
+  orderRepo(repository::OrderRepo(filename)), productContr(prod_contr) {}
 
   const std::vector<domain::OrderDomain>& OrderController::getOrders() {
     return orderRepo.getOrders();
@@ -33,9 +33,20 @@ namespace controller {
 
   void OrderController::addOrder(const domain::OrderDomain& order) {
     orderRepo.addOrder(order);
+    std::vector<std::shared_ptr<Product>> product_list = productContr.listProducts();
+    for (auto& product: order.getProducts()) {
+      for (int i = 0; i < product_list.size(); i++) {
+        if (product.first.get_id() == product_list[i]->get_id()) {
+          productContr.updateProduct(product_list[i]->get_id(),
+            product_list[i]->get_name(), product_list[i]->get_price(),
+            product_list[i]->get_quantity()-product.second);
+        }
+      }
+    }
+
   }
 
-  bool OrderController::updateOrder(int orderNumber, const std::vector<std::pair<Product, int>>& newProducts) {
+  bool OrderController::updateOrder(int orderNumber, const std::vector<std::pair<Product, float>>& newProducts) {
     return orderRepo.updateOrder(orderNumber, newProducts);
   }
 
@@ -47,7 +58,7 @@ namespace controller {
     return orderRepo.assignEmployeeIfUnassigned(orderNumber, employee);
   }
 
-  bool OrderController::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, int>>& products) {
+  bool OrderController::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, float>>& products) {
     return orderRepo.createReservation(customer, products);
   }
 

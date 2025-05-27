@@ -34,7 +34,7 @@ OrderStatus OrderDomain::getStatus() const {
   return this->status;
 }
 
-std::vector<std::pair<Product, int>> OrderDomain::getProducts() const {
+std::vector<std::pair<Product, float>> OrderDomain::getProducts() const {
   return this->products;
 }
 
@@ -54,7 +54,7 @@ void OrderDomain::setEmployee(const employeedomain::Employee& newemployee) {
   this->employee = newemployee;
 }
 
-void OrderDomain::setProducts(const std::vector<std::pair<Product, int>>& newproducts) {
+void OrderDomain::setProducts(const std::vector<std::pair<Product, float>>& newproducts) {
     this->products = newproducts;
 }
 
@@ -62,7 +62,7 @@ void OrderDomain::changeStatus(OrderStatus newstatus) {
   setStatus(newstatus);
 }
 
-void OrderDomain::changeOrder(const std::vector<std::pair<Product, int>>& newProducts) {
+void OrderDomain::changeOrder(const std::vector<std::pair<Product, float>>& newProducts) {
   setProducts(newProducts);
   calculateTotalPrice();
 }
@@ -76,7 +76,7 @@ void OrderDomain::calculateTotalPrice() {
     }
 }
 
-void OrderDomain::createReservation(const Customer& customer, const std::vector<std::pair<Product, int>>& products) {
+void OrderDomain::createReservation(const Customer& customer, const std::vector<std::pair<Product, float>>& products) {
 	this->customer = customer;
     this->products = products;
     this->status = OrderStatus::Reservation;
