@@ -76,16 +76,17 @@ void Customer_UI::run(Customer* customer) {
             products = product_cont.listProducts();
             std::vector<pair<std::shared_ptr<Product>,int>> ordered_products;
             std::vector<pair<int,int>> ordered_products_id;
-            cout<<"Please enter the id of the products you want to reserve or number 0 to stop:\n";
             int product_id = -1;
             int quantity = -1;
             while (product_id != 0) {
+                cout<<"Please enter the id of the products you want to reserve or number 0 to stop:\n";
                 product_id = input_integer();
                 // validare ID
-                cout<<"Please enter the quantity:\n";
-                if (quantity)
+                if (quantity && product_id != 0){
+                    cout<<"Please enter the quantity:\n";
                 quantity = input_integer();
-                ordered_products_id.push_back({product_id,quantity});
+            ordered_products_id.push_back({product_id,quantity});
+                }
                 // validare stoc
             }
             while (!ordered_products_id.empty()) {
