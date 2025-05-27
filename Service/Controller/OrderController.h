@@ -10,7 +10,7 @@ namespace controller {
         repository::OrderRepo orderRepo;
 
        public:
-         OrderController(repository::OrderRepo& orderRepo);
+         OrderController(const std::string& filename);
 
         const std::vector<domain::OrderDomain>& getOrders();
 
@@ -44,7 +44,6 @@ namespace controller {
         //creates a reservation
         bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products);
     };
-
 }
 
 #endif //ORDERCONTROLLER_H

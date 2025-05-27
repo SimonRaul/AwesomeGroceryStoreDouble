@@ -4,7 +4,8 @@
 namespace controller {
 
   //constructor
-  OrderController::OrderController(repository::OrderRepo& orderRepo) : orderRepo(orderRepo) {}
+  OrderController::OrderController(const std::string& filename) : orderRepo(repository::OrderRepo(filename)) {
+  }
 
   const std::vector<domain::OrderDomain>& OrderController::getOrders() {
     return orderRepo.getOrders();
@@ -49,5 +50,6 @@ namespace controller {
   bool OrderController::createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products) {
     return orderRepo.createReservation(customer, orderNumber, products);
   }
+
 
 }

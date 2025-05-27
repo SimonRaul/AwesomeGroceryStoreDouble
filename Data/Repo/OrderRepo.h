@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 namespace repository {
 
@@ -16,7 +17,9 @@ class OrderRepo {
   std::vector<domain::OrderDomain> orders;
 
   public:
-  OrderRepo(std::vector<domain::OrderDomain> orders);
+  OrderRepo(const std::string& filename);
+
+  std::vector<std::vector<std::string>> readFileSplitByColon(const std::string& filename);
 
   const std::vector<domain::OrderDomain>& getOrders();
 
@@ -49,7 +52,6 @@ class OrderRepo {
 
   //creates a reservation
   bool createReservation(const Customer_Domain::Customer& customer, int orderNumber, const std::vector<std::pair<Product, int>>& products);
-
 
 };
 
