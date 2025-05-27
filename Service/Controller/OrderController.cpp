@@ -59,6 +59,16 @@ namespace controller {
   }
 
   bool OrderController::createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, float>>& products) {
+    std::vector<std::shared_ptr<Product>> product_list = productContr.listProducts();
+    for (auto& product: products) {
+      for (int i = 0; i < product_list.size(); i++) {
+        if (product.first.get_id() == product_list[i]->get_id()) {
+          productContr.updateProduct(product_list[i]->get_id(),
+            product_list[i]->get_name(), product_list[i]->get_price(),
+            product_list[i]->get_quantity()-product.second);
+        }
+      }
+    }
     return orderRepo.createReservation(customer, products);
   }
 
