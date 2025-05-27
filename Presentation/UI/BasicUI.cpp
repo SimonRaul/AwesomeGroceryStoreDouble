@@ -79,12 +79,9 @@ void BasicUI::run_program() {
         }
 
         if (dynamic_cast<Employee*>(raw_ptr)) {
-            cout<< raw_ptr->get_name()<< endl;
+            // emp_ui.run();
         } else if (dynamic_cast<Customer*>(raw_ptr)) {
-           cout<< raw_ptr->get_name()<< endl;
+           // cus_ui.run();
         }
-        // else {
-        //     throw runtime_error("Logged-in user is of unknown type.");
-        // }
     }
 }

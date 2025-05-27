@@ -18,6 +18,8 @@ add_executable(runTests
         UserControllerTests.cpp
         CustomerTest.cpp
         EmployeeTest.cpp
+        ProductTest.cpp
+        OrderDomainTest.cpp
         ${DOMAIN_SRC}
         ${SERVICE_SRC}
         ${REPO_SRC}
