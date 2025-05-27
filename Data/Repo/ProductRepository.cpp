@@ -107,5 +107,36 @@ namespace productrepo {
         return Product("",0,0,0);
     }
 
+    bool ProductRepository::validate_id (int id)
+    {
+        for (auto it=products.begin(); it != products.end(); ++it)
+        {
+            if ((*it)->get_id() == std::to_string(id))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool ProductRepository::validate_stock(int id, int amount)
+    {
+        if (amount > 0)
+        {
+            for (auto it=products.begin(); it != products.end(); ++it)
+            {
+                if ((*it)->get_id() == std::to_string(id))
+                {
+                    if (amount <= (*it)->get_quantity())
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
 }
 
