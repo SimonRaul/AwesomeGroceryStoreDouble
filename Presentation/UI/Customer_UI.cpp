@@ -64,8 +64,8 @@ void Customer_UI::run(Customer* customer) {
     while (true) {
         std::cout<<main_menu();
         int option;
-        std::cout<<"Option: ";
-        std::cin>>option;
+        // std::cout<<"Option: ";
+        option = input_integer();
         std::cout<<std::endl;
         if (option == 1) {
             std::cout<<"suntem cooked!";
@@ -97,7 +97,17 @@ void Customer_UI::run(Customer* customer) {
                     }
                 }
             }
-            order_cont.createReservation(customer,ordered_products);
+            vector<pair<Product,float>> product_vec;             // vectorul dorit
+
+            for (const auto& ptr : ordered_products) {
+                if (ptr.first) {
+                    product_vec.push_back({*ptr.first,ptr.second});  // se copiază obiectul din shared_ptr
+                }
+            }
+            order_cont.createReservation(*customer,product_vec);
+        }
+        else if (option == 3) {
+
         }
     }
 }

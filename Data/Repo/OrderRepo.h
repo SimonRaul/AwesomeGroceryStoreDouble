@@ -15,6 +15,7 @@ namespace repository {
 class OrderRepo {
   private:
   std::vector<domain::OrderDomain> orders;
+  std::string filename;
 
   public:
   OrderRepo(const std::string& filename);
@@ -52,7 +53,7 @@ class OrderRepo {
 
   //creates a reservation
   bool createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, float>>& products);   //change ordderNumber logic
-
+  void writeOrdersToFile();
 };
 
 }

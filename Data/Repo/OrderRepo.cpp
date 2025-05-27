@@ -41,6 +41,7 @@ namespace repository {
     }
 
     OrderRepo::OrderRepo(const string& filename) {
+        this->filename = filename;
     auto lines = readFileSplitByColon(filename);
 
     for (const auto& tokens : lines) {
@@ -171,6 +172,7 @@ namespace repository {
             return;
         }
         orders.push_back(order);
+        writeOrdersToFile();
     }
 
     bool OrderRepo::updateOrder(int orderNumber, const std::vector<std::pair<Product, float>>& newProducts) {
@@ -187,6 +189,7 @@ namespace repository {
 
                 order.setProducts(newProducts);
                 order.calculateTotalPrice();
+                writeOrdersToFile();
                 return true;
             }
         }
@@ -202,6 +205,7 @@ namespace repository {
                     return false;
                 }
                 order.setStatus(newStatus);
+                writeOrdersToFile();
                 return true;
             }
         }
@@ -214,6 +218,7 @@ namespace repository {
             if (order.getNumber() == orderNumber) {
                 if (order.getEmployee().get_id() == 0) {                        //id=0 means that the order isn't assigned to anybody
                     order.setEmployee(employee);
+                    writeOrdersToFile();
                     return true;
                 } else {
                     std::cerr << "Order already has an assigned employee.\n";
@@ -247,7 +252,57 @@ namespace repository {
         newOrder.calculateTotalPrice();
 
         orders.push_back(newOrder);
+        writeOrdersToFile();
         return true;
+    }
+
+    void OrderRepo::writeOrdersToFile() {
+        ofstream file(filename);
+        if (!file.is_open()) {
+            cerr << "Error: Could not open file for writing.\n";
+            return;
+        }
+
+        for (const auto& order : orders) {
+            // Order number
+            file << order.getNumber() << ":";
+
+            // Date
+            const tm& date = order.getDate();
+            file << put_time(&date, "%Y-%m-%d") << ":";
+
+            // Status
+            string status_str;
+            switch (order.getStatus()) {
+                case OrderStatus::Reservation: status_str = "Reservation"; break;
+                case OrderStatus::Confirmed: status_str = "Confirmed"; break;
+                case OrderStatus::Completed: status_str = "Completed"; break;
+            }
+            file << status_str << ":";
+
+            // Products
+            const auto& products = order.getProducts();
+            for (size_t i = 0; i < products.size(); ++i) {
+                file << products[i].first.get_name() << "," << products[i].second;
+                if (i != products.size() - 1) file << "|";
+            }
+            file << ":";
+
+            // Customer
+            Customer c = order.getCustomer();
+            file << c.get_id() << "," << c.get_name() << "," << c.get_forename() << ","
+                 << c.get_email() << "," << c.get_password() << "," << c.get_address() << ":";
+
+            // Employee
+            employeedomain::Employee e = order.getEmployee();
+            file << e.get_id() << "," << e.get_name() << "," << e.get_forename() << ","
+                 << e.get_email() << "," << e.get_password() << "," << e.get_position() << ":";
+
+            // Total price
+            file << fixed << setprecision(2) << order.getTotalPrice() << "\n";
+        }
+
+        file.close();
     }
 }
 
