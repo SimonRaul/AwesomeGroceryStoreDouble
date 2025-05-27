@@ -16,6 +16,8 @@ using namespace usercontroller;
 
 namespace basicUI {
     class BasicUI {
+        friend class Customer_UI;
+        friend class EmployeeUI;
     private:
         string name, forename;
         Customer_UI cus_ui;

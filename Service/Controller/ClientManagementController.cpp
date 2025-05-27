@@ -11,9 +11,10 @@ using namespace domain;
 
 namespace controller {
 
-ClientManagementController::ClientManagementController(Customer_Repo::Customer_Repo& cus_repo, OrderRepo& order_repo)
-    : cus_repo(cus_repo), order_repo(order_repo) {
-}
+ClientManagementController::ClientManagementController(::Customer_Repo::Customer_Repo &cus_repo, OrderRepo &order_repo)
+    : cus_repo(cus_repo), order_repo(order_repo) {}
+
+
 
 void ClientManagementController::gdprAnonymize(const string &email) {
     Customer_Domain::Customer customer = cus_repo.find_by_email(email);
