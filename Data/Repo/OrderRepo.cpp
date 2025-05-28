@@ -247,7 +247,9 @@ namespace repository {
         int new_order_number = max_order_number + 1;
 
         std::tm now = get_current_date();
-        OrderDomain newOrder(new_order_number, now, OrderStatus::Reservation, customer, employeedomain::Employee());
+        employeedomain::Employee e;
+        e.set_id(0);
+        OrderDomain newOrder(new_order_number, now, OrderStatus::Reservation, customer, e);
         newOrder.setProducts(products);
         newOrder.calculateTotalPrice();
 
@@ -295,8 +297,13 @@ namespace repository {
 
             // Employee
             employeedomain::Employee e = order.getEmployee();
-            file << e.get_id() << "," << e.get_name() << "," << e.get_forename() << ","
-                 << e.get_email() << "," << e.get_password() << "," << e.get_position() << ":";
+            // if (e.get_email() == "") {
+                // file <<
+            // }
+            // else {
+                file << e.get_id() << "," << e.get_name() << "," << e.get_forename() << ","
+                     << e.get_email() << "," << e.get_password() << "," << e.get_position() << ":";
+            // }
 
             // Total price
             file << fixed << setprecision(2) << order.getTotalPrice() << "\n";

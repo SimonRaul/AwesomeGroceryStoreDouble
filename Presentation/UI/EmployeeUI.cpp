@@ -5,6 +5,10 @@
 #include "./EmployeeUI.h"
 #include <iostream>
 
+EmployeeUI::EmployeeUI(const std::string &prod_file, const std::string &order_file, const std::string &cus_file)
+    : prod_contr(prod_file), order_contr(order_file, prod_contr), client_mgn(cus_file, order_contr) {}
+
+
 std::string EmployeeUI::main_menu() {
     return "Choose an option:\n1 - Order management\n2 - Client management\n3 - Edit personal details\n4 - Exit\n━━━━━━━━━━ ✦ ✧ ✦ ━━━━━━━━━━\n";
 }

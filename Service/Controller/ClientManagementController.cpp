@@ -1,6 +1,8 @@
 #include "ClientManagementController.h"
 #include "../../Data/Repo/Customer_Repo.h"
 #include <set>
+
+#include "OrderController.h"
 #include "../../Data/Domain/OrderDomain.h"
 
 using namespace std;
@@ -11,8 +13,8 @@ using namespace domain;
 
 namespace controller {
 
-ClientManagementController::ClientManagementController(::Customer_Repo::Customer_Repo &cus_repo, OrderRepo &order_repo)
-    : cus_repo(cus_repo), order_repo(order_repo) {}
+ClientManagementController::ClientManagementController(const string& filename, const OrderController &order_contr)
+    : cus_repo(filename), order_contr(order_contr) {}
 
 
 
@@ -69,7 +71,7 @@ vector<shared_ptr<Customer>> ClientManagementController::listByProduct(const Pro
     vector<shared_ptr<Customer>> customers;
     set<int> customerIds;
 
-    const vector<OrderDomain>& orders = order_repo.getOrders();
+    const vector<OrderDomain>& orders = order_contr.getOrders();
 
     for (const auto& order : orders) {
         const vector<pair<Product, float>>& orderProducts = order.getProducts();

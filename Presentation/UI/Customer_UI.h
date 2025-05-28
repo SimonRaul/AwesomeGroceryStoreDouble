@@ -33,6 +33,10 @@ public:
 
     std::string input_string();
 
+    float input_float();
+
+    vector<pair<Product,float>> from_id_and_quantity_to_product_and_quantity_list();
+
     void run(Customer* current_customer);
 };
 
