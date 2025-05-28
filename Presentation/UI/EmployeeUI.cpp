@@ -146,6 +146,7 @@ void EmployeeUI::run_client_menu(Employee* employee) {
         else if (option == 5) {
             std::cout<<"Please enter the id of the client:\n";
             int id = input_integer();
+            // needs validation
             std::cout<<"Please enter the updated adress of the client:\n";
             string address = input_string();
             client_mgn.updateCustomer(id, address);
@@ -215,16 +216,55 @@ void EmployeeUI::run_order_menu(Employee* employee) {
             std::cout<<order_contr.getTotalOrdersInYear(year) << "\n";
         }
         else if (option == 4) {
-            //Need implementation
+            std::cout<<"Please enter the month you want to search:\n";
+            int month = input_integer();
+            std::cout<<order_contr.getTotalOrdersInMonth(month) << "\n";
         }
-        // else if (option == 5) {
-        //     std::cout<<"Please enter the order ID you want to update:\n";
-        //     int id = input_integer();
-        //     std::cout<<"Please enter the new status of the order:\n";
-        //     std::string status = input_string();
-        //     domain::OrderStatus order_status = string_to_status(status);
-        //     order_contr.updateOrder(id, order_status);
-        // }
+        else if (option == 5) {
+            std::cout<<"Please enter the order ID you want to update:\n";
+            int id = input_integer();
+            // validate if employee has order or no
+            std::vector<pair<Product,float>> ordered_products;
+            ordered_products = order_contr.get_products_from_id(id);
+            if (!ordered_products.empty()) {
+                cout<<"Current products in order are: \n";
+                for (auto& product : ordered_products) {
+                    cout<<product.first<<"\nQuantity ordered: "<<product.second<<endl;
+                }
+
+            std::vector<pair<Product,float>> new_products;
+            std::vector<pair<int,float>> new_products_id;
+            int product_id = -1;
+            float quantity;
+            while (product_id != 0) {
+                cout<<"Please enter the id of the products you want to put in the order or number 0 to stop:\n";
+                product_id = input_integer();
+                // validare ID
+                if (product_id != 0){
+                    cout<<"Please enter the quantity:\n";
+                    quantity = input_float();
+                    new_products_id.push_back({product_id,quantity});
+                }
+                // validare stoc
+            }
+            std::vector<std::shared_ptr<Product>> products;
+            products = prod_contr.listProducts();
+            while (!new_products_id.empty()) {
+                pair<int,float> current_product = new_products_id.back();
+                new_products_id.pop_back();
+                for (int i = 0; i < products.size(); i++) {
+                    if (stoi(products[i]->get_id()) == current_product.first) {
+                        new_products.push_back({*products[i], current_product.second});
+                    }
+                }
+            }
+
+            order_contr.updateOrder(id,new_products);
+        }
+            else {
+                cout<<"No order found\n";
+            }
+        }
         else if (option == 6) {
             std::cout<<"Please enter the order ID you want to mark as completed:\n";
             int id = input_integer();
@@ -302,8 +342,8 @@ int EmployeeUI::input_integer() {
             return input;
 }
 
-int EmployeeUI::input_float() {
-    int input;
+float EmployeeUI::input_float() {
+    float input;
     bool valid = false;
     while (!valid) {
         std::cout << "Enter floating point number: " ;

@@ -111,6 +111,22 @@ namespace repository {
         return orders;
     }
 
+
+    std::vector<pair<Product,float>> OrderRepo::get_order_products(int id) {
+        std::vector <pair<Product, float>> current_products;
+        for (auto& order : orders) {
+            if (order.getNumber() == id) {
+                for (auto& product : order.getProducts()) {
+                    current_products.push_back(product);
+                }
+                return current_products;
+            }
+        }
+        std::cerr << "Order number not found.\n";
+        return {};
+    }
+
+
     std::vector<domain::OrderDomain> OrderRepo::getOrdersByStatus(domain::OrderStatus status) {
         std::vector<domain::OrderDomain> result;
         for (const auto& order : orders) {
