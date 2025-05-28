@@ -16,6 +16,11 @@ class OrderRepo {
   private:
   std::vector<domain::OrderDomain> orders;
   std::string filename;
+  std::tm get_current_date() {
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    return *std::localtime(&now_c);
+  }
 
   public:
   OrderRepo(const std::string& filename);

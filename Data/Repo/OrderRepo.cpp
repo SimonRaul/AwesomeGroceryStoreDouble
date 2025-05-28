@@ -246,7 +246,7 @@ namespace repository {
 
         int new_order_number = max_order_number + 1;
 
-        std::tm now = {};
+        std::tm now = get_current_date();
         OrderDomain newOrder(new_order_number, now, OrderStatus::Reservation, customer, employeedomain::Employee());
         newOrder.setProducts(products);
         newOrder.calculateTotalPrice();

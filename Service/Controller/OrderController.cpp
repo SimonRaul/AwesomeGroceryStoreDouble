@@ -15,6 +15,36 @@ namespace controller {
     return orderRepo.getOrdersByStatus(status);
   }
 
+
+
+  std::vector<domain::OrderDomain> OrderController::getOrdersByCustomer(Customer* customer) {
+    std::vector<domain::OrderDomain> results;
+    for (auto& order: orderRepo.getOrders()) {
+      if (order.getCustomer().get_id() == customer->get_id()) {
+        results.push_back(order);
+      }
+    }
+    return results;
+
+  }
+
+bool OrderController::validateID(int id) {
+    for (auto& order: orderRepo.getOrders()) {
+      if (order.getCustomer().get_id() == id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  domain::OrderDomain OrderController::getOrderByID(int id) {
+    for (auto& order: orderRepo.getOrders()) {
+      if (order.getCustomer().get_id() == id) {
+        return order;
+      }
+    }
+  }
+
   double OrderController::getTotalOrdersInYear(int year) const {
     return orderRepo.getTotalOrdersInYear(year);
   }
@@ -51,6 +81,22 @@ namespace controller {
   }
 
   bool OrderController::setOrderStatus(int orderNumber, domain::OrderStatus newStatus) {
+    if (newStatus == domain::OrderStatus::Completed) {
+      std::vector<std::shared_ptr<Product>> product_list = productContr.listProducts();
+      for (auto& order: orderRepo.getOrders()) {
+        if (order.getNumber() == orderNumber) {
+          for (auto& product : order.getProducts()) {
+            for (int i = 0; i < product_list.size(); i++) {
+              if (product.first.get_id() == product_list[i]->get_id()) {
+                productContr.updateProduct(product_list[i]->get_id(),
+                  product_list[i]->get_name(), product_list[i]->get_price(),
+                  product_list[i]->get_quantity()-product.second);
+              }
+            }
+          }
+        }
+      }
+    }
     return orderRepo.setOrderStatus(orderNumber, newStatus);
   }
 

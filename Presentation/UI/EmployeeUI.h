@@ -15,9 +15,11 @@ public:
 
     std::string order_menu();
 
-    std::string account_menu();
-
     std::string user_menu();
+
+    int input_integer();
+
+    std::string input_string();
 
     void create_instance() override;
 

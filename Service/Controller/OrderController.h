@@ -21,6 +21,12 @@ namespace controller {
         //returns all the orders with a specified status
          std::vector<domain::OrderDomain> getOrdersByStatus(domain::OrderStatus status);
 
+        std::vector<domain::OrderDomain> getOrdersByCustomer(Customer* customer);
+
+        bool validateID(int id);
+
+        domain::OrderDomain getOrderByID(int id);
+
         //calculates the number of orders in a specified year
         double getTotalOrdersInYear(int year) const;
 
