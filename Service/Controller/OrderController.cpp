@@ -15,8 +15,6 @@ namespace controller {
     return orderRepo.getOrdersByStatus(status);
   }
 
-
-
   std::vector<domain::OrderDomain> OrderController::getOrdersByCustomer(Customer* customer) {
     std::vector<domain::OrderDomain> results;
     for (auto& order: orderRepo.getOrders()) {

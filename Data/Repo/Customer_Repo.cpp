@@ -41,7 +41,7 @@ namespace Customer_Repo {
     }
 
     Customer_Repo::Customer_Repo(const string &filename) {
-        int max= 1;
+        int max = 1;
         std::vector<std::vector<std::string>> customers_vector = readFileSplitByColon(filename);
         for (int i = 0; i < customers_vector.size(); i++) {
             if (stoi(customers_vector[i][0]) > max) {

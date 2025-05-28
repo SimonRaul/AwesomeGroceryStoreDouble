@@ -28,4 +28,17 @@ bool ProductController::updateProduct(const std::string& id, const std::string& 
     return productRepository.update(id, name, price, quantity);
 }
 
+std::shared_ptr<Product> ProductController::getProductById(int id) {
+    auto products = productRepository.list();
+    for (const auto& product : products) {
+        try {
+            if (std::stoi(product->get_id()) == id) {
+                return product;
+            }
+        } catch (const std::invalid_argument&) {
+            continue;
+        }
+    }
+    return nullptr;
+}
 
