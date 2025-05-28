@@ -1,0 +1,2 @@
+1:2025-04-10:Reservation:Apple,2|Banana,3:101,Doe,John,john.doe@example.com,pass123,123 Main St:201,Smith,Jane,jane.smith@example.com,admin123,Manager:50.00
+2:2025-03-22:Confirmed:Milk,1|Bread,2:102,Roe,Alice,alice.roe@example.com,alicepass,456 Oak St:202,Brown,Tom,tom.brown@example.com,securepass,Clerk:30.00
