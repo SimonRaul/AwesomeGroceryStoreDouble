@@ -66,6 +66,24 @@ class OrderDomain {
     //creates a "Reservation" order, that doesn't have an assigned employee
     void createReservation(const Customer& customer, const std::vector<std::pair<Product, float>>& products);
 
+    static std::string status_to_string(OrderStatus status) {
+        switch (status) {
+            case OrderStatus::Reservation: return "Reservation";
+            case OrderStatus::Confirmed:   return "Confirmed";
+            case OrderStatus::Completed:   return "Completed";
+            default: return "Unknown";
+        }
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const OrderDomain& order) {
+        // OrderStatus order_status = order.getStatus();
+        os << "ID: " << order.getNumber() << ", "
+           << "Date: " << order.getDate().tm_year <<"-"<< order.getDate().tm_mon <<"-"<< order.getDate().tm_wday << ", "
+           // << "Status: " << order.status_to_string(order_status) << ", "
+           << "Total Price: " << order.getTotalPrice() << "\n";
+        return os;
+    }
+
 
 };
 

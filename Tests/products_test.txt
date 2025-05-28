@@ -1,0 +1,2 @@
+1:Apple iPhone 15:999.99:12
+2:Samsung Galaxy S24:899.5:20

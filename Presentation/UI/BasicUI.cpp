@@ -43,7 +43,8 @@ pair<string,string> BasicUI::insert_name_and_forename() {
 //Displays the main menu
 string BasicUI::dispaly_main_menu() {
     return "1 - Create an account\n"
-            "2 - Log in\n------------------- * * * -------------------\n";
+            "2 - Log in\n"
+            "0 - Exit\n------------------- * * * -------------------\n";
 }
 
 pair<string,string> BasicUI::insert_email_and_password() {
@@ -59,35 +60,40 @@ pair<string,string> BasicUI::insert_email_and_password() {
 
 
 void BasicUI::run_program() {
-    cout << display_start_message();
-    // insert_name_and_forename();
-    cout << dispaly_main_menu();
-    int option;
-    cout << "Option: ";
-    cin >> option;
-    cout << endl;
-    if (option == 1) {
-        pair<string,string> name_forename = insert_name_and_forename();
-        pair<string, string> email_password = insert_email_and_password();
-        string address;
-        cout << "Address: " << endl;
-        cin>> address;
-        user_crt.create_account(name_forename.first, name_forename.second,
-            email_password.first, email_password.second, address);
-    }
-    if (option == 2) {
-        pair<string,string> email_and_password= insert_email_and_password();
-        user_crt.login(email_and_password.first, email_and_password.second);
-        auto raw_ptr = user_crt.get_current_user();
-
-        if (!raw_ptr) {
-            throw runtime_error("No user is currently logged in.");
+    while (true) {
+        cout << display_start_message();
+        // insert_name_and_forename();
+        cout << dispaly_main_menu();
+        int option;
+        cout << "Option: ";
+        cin >> option;
+        cout << endl;
+        if (option == 0) {
+            break;
         }
+        if (option == 1) {
+            pair<string,string> name_forename = insert_name_and_forename();
+            pair<string, string> email_password = insert_email_and_password();
+            string address;
+            cout << "Address: " << endl;
+            cin>> address;
+            user_crt.create_account(name_forename.first, name_forename.second,
+                email_password.first, email_password.second, address);
+        }
+        if (option == 2) {
+            pair<string,string> email_and_password= insert_email_and_password();
+            user_crt.login(email_and_password.first, email_and_password.second);
+            auto raw_ptr = user_crt.get_current_user();
 
-        if (dynamic_cast<Employee*>(raw_ptr)) {
-            // emp_ui.run();
-        } else if (dynamic_cast<Customer*>(raw_ptr)) {
-           cus_ui.run(dynamic_cast<Customer*>(raw_ptr));
+            if (!raw_ptr) {
+                throw runtime_error("No user is currently logged in.");
+            }
+
+            if (dynamic_cast<Employee*>(raw_ptr)) {
+                // emp_ui.run();
+            } else if (dynamic_cast<Customer*>(raw_ptr)) {
+                cus_ui.run(dynamic_cast<Customer*>(raw_ptr));
+            }
         }
     }
 }
