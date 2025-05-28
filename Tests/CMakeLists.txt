@@ -20,6 +20,8 @@ add_executable(runTests
         EmployeeTest.cpp
         ProductTest.cpp
         OrderDomainTest.cpp
+        Customer_RepoTest.cpp
+        EmployeeRepoTest.cpp
         ${DOMAIN_SRC}
         ${SERVICE_SRC}
         ${REPO_SRC}
@@ -31,5 +33,8 @@ target_link_libraries(runTests gtest gtest_main)
 configure_file(${CMAKE_SOURCE_DIR}/Tests/AccountsTest AccountsTest COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/Tests/clientsTest.txt clientsTest.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/Tests/employees_test.txt employees_test.txt COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/Tests/orders_test.txt orders_test.txt COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/Tests/products_test.txt products_test.txt COPYONLY)
+
 
 gtest_discover_tests(runTests)

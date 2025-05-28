@@ -1,6 +1,7 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 #include <string>
+#include <iostream>
 
 namespace productdomain {
 
@@ -28,6 +29,14 @@ public:
     void set_name(std::string new_name);
     void set_price(float new_price);
     void set_quantity(float new_quantity);
+
+    friend std::ostream& operator<<(std::ostream& os, const Product& product) {
+        os << "ID: " << product.get_id() << ", "
+           << "Name: " << product.get_name() << ", "
+           << "Price: " << product.get_price() << ", "
+           << "Quantity: " << product.get_quantity() << "\n";
+        return os;
+    }
 };
 
 }

@@ -62,7 +62,7 @@ TEST(OrderDomainTest, ChangeStatusWorks) {
 TEST(OrderDomainTest, ChangeOrderAndCalculatePrice) {
     Product p1("Milk", 5.0f, 1.0f);
     Product p2("Bread", 3.0f, 1.0f);
-    std::vector<std::pair<Product, int>> items = {
+    std::vector<std::pair<Product, float>> items = {
         {p1, 2},  // 2 * 5 = 10
         {p2, 3}   // 3 * 3 = 9
     };
@@ -76,7 +76,7 @@ TEST(OrderDomainTest, ChangeOrderAndCalculatePrice) {
 
 TEST(OrderDomainTest, CreateReservationWorksCorrectly) {
     Product p("Juice", 4.5f, 1.0f);
-    std::vector<std::pair<Product, int>> list = {{p, 4}}; // 4 * 4.5 = 18.0
+    std::vector<std::pair<Product, float>> list = {{p, 4}}; // 4 * 4.5 = 18.0
 
     Customer customer = make_customer();
     OrderDomain order(3, make_date(2024, 1, 1), OrderStatus::Completed, customer, make_employee());
@@ -98,7 +98,7 @@ TEST(OrderDomainTest, SettersWorkIndependently) {
 
     // Test setProducts
     Product p("Apple", 2.0f, 1.0f);
-    std::vector<std::pair<Product, int>> prods = {{p, 5}};
+    std::vector<std::pair<Product, float>> prods = {{p, 5}};
     order.setProducts(prods);
     EXPECT_EQ(order.getProducts().size(), 1);
 
