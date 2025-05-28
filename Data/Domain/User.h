@@ -25,10 +25,10 @@ namespace userdomain {
         User(string name = "", string forename = "", string email = "", string password = "");
 
         //Getters
-        string get_name();
-        string get_forename();
-        string get_email();
-        string get_password();
+        const string get_name();
+        const string get_forename();
+        const string get_email();
+        const string get_password();
 
         //Setters
         void set_name(string new_name);

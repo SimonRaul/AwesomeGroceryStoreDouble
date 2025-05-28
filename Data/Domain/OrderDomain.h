@@ -80,12 +80,22 @@ class OrderDomain {
     }
 
     friend std::ostream& operator<<(std::ostream& os, const OrderDomain& order) {
-        // OrderStatus order_status = order.getStatus();
-        const std::tm tm = order.getDate();
+        OrderStatus order_status = order.getStatus();
+        const std::tm date = order.getDate();
         os << "ID: " << order.getNumber() << ", "
-           << "Date: " <<  std::asctime(&tm)
-           // << "Status: " << order.status_to_string(order_status) << ", "
-           << "Total Price: " << order.getTotalPrice() << "\n";
+           << "Date: " <<  std::put_time(&date, "%Y-%m-%d") << ", "
+           << "Status: " << order.status_to_string(order_status) << ", "
+           << "Total Price: " << order.getTotalPrice() << "\n"
+           << "Products: \n";
+        for (const auto& [product, quantity] : order.getProducts()) {
+            os << "Name: " << product.get_name()
+               << "Quantity: " << quantity
+               << "Unit Price: " << product.get_price() << '\n';
+
+        }
+
+        os << "------------------- * * * -------------------\n";
+
         return os;
     }
 
