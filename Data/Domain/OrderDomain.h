@@ -77,8 +77,9 @@ class OrderDomain {
 
     friend std::ostream& operator<<(std::ostream& os, const OrderDomain& order) {
         // OrderStatus order_status = order.getStatus();
+        const std::tm tm = order.getDate();
         os << "ID: " << order.getNumber() << ", "
-           << "Date: " << order.getDate().tm_year <<"-"<< order.getDate().tm_mon <<"-"<< order.getDate().tm_wday << ", "
+           << "Date: " <<  std::asctime(&tm)
            // << "Status: " << order.status_to_string(order_status) << ", "
            << "Total Price: " << order.getTotalPrice() << "\n";
         return os;

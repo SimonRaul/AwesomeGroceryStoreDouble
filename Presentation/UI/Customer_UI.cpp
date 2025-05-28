@@ -10,7 +10,7 @@
 Customer_UI::Customer_UI(const std::string& cus_file, const std::string& prod_file, const std::string& order_file) :cus_repo(cus_file), product_cont(prod_file), order_cont(controller::OrderController(order_file, product_cont)){}
 
 std::string Customer_UI::main_menu() {
-    return "Choose an option:\n1 - Change Password\n2 - Reserve Product\n3 - See Products\n4 - See orders\n5 - See order status (by order ID)\n6 - Exit\n------------------- * * * -------------------\n";
+    return "Choose an option:\n1 - See Products\n2 - Reserve Product\n3 - See orders\n4 - See order status (by order ID)\n5 - Exit\n------------------- * * * -------------------\n";
 
 }
 
@@ -68,8 +68,14 @@ void Customer_UI::run(Customer* customer) {
         option = input_integer();
         std::cout<<std::endl;
         if (option == 1) {
-            std::cout<<"suntem cooked!";
-            break;
+            // std::cout<<"suntem cooked!\n";
+            std::vector<std::shared_ptr<Product>> products;
+            products = product_cont.listProducts();
+            std::cout<<"Product list:\n";
+            for (auto& product : products) {
+                cout<<"ID: "<<product->get_id()<<" Name: "<<product->get_name()<<" Price: "<<product->get_price()<<" Quantity: "<<product->get_quantity()<<"\n";
+            }
+            cout<<"\n------------------- * * * -------------------\n";
         }
         else if (option == 2) {
             std::vector<std::shared_ptr<Product>> products;
@@ -102,13 +108,33 @@ void Customer_UI::run(Customer* customer) {
 
             for (const auto& ptr : ordered_products) {
                 if (ptr.first) {
-                    product_vec.push_back({*ptr.first,ptr.second});  // se copiază obiectul din shared_ptr
+                    product_vec.push_back({*ptr.first,float(ptr.second)});  // se copiază obiectul din shared_ptr
                 }
             }
             order_cont.createReservation(*customer,product_vec);
         }
-        else if (option == 6) {
-
+        else if (option == 3) {
+            cout<<"Your orders are:\n";
+            for (auto& order: order_cont.getOrdersByCustomer(customer)) {
+                cout<<order;
+            }
+        }
+        else if (option == 4) {
+            cout<<"Please give order ID:\n";
+            int id = input_integer();
+            if (order_cont.validateID(id)) {
+                domain::OrderDomain order = order_cont.getOrderByID(id);
+                cout<<order.status_to_string(order.getStatus());
+            }
+            else {
+                cout<<"ID was not found!\n";
+            }
+        }
+        else if (option == 5) {
+            break;
+        }
+        else {
+            cout<<"Please give valid input!!!\n";
         }
     }
 }
