@@ -43,6 +43,11 @@ bool OrderController::validateID(int id) {
     }
   }
 
+  std::vector<pair<Product,float>> OrderController::get_products_from_id(int id) {
+    return orderRepo.get_order_products(id);
+  }
+
+
   double OrderController::getTotalOrdersInYear(int year) const {
     return orderRepo.getTotalOrdersInYear(year);
   }

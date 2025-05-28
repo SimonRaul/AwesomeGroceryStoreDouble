@@ -39,7 +39,7 @@ public:
 
     int input_integer();
 
-    int input_float();
+    float input_float();
 
     std::string input_string();
 

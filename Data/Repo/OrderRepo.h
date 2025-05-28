@@ -29,6 +29,8 @@ class OrderRepo {
 
   const std::vector<domain::OrderDomain>& getOrders();
 
+  std::vector<pair<Product,float>> get_order_products(int id);
+
   //returns all the orders with a specified status
   std::vector<domain::OrderDomain> getOrdersByStatus(domain::OrderStatus status);
 

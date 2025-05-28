@@ -59,6 +59,58 @@ pair<string,string> BasicUI::insert_email_and_password() {
 }
 
 
+int BasicUI::input_integer() {
+    int input;
+    bool valid = false;
+    while (!valid) {
+        std::cout << "Enter number: " ;
+        std::cin >> input;
+        if(std::cin.fail())
+        {
+            std::cout<<"Please enter a number...\n";
+            valid = false;
+        }
+        else valid = true;
+    }
+    std::cout<<"\n";
+    return input;
+}
+
+float BasicUI::input_float() {
+    float input;
+    bool valid = false;
+    while (!valid) {
+        std::cout << "Enter floating point number: " ;
+        std::cin >> input;
+        if(std::cin.fail())
+        {
+            std::cout<<"Please enter a number...\n";
+            valid = false;
+        }
+        else valid = true;
+    }
+    std::cout<<"\n";
+    return input;
+}
+
+std::string BasicUI::input_string() {
+    std::string input;
+    bool valid = false;
+    while (!valid) {
+        std::cout << "Enter a string of characters: " ;
+        std::cin >> input;
+        if(std::cin.fail())
+        {
+            std::cout<<"Please enter a string of characters...\n";
+            valid = false;
+        }
+        else valid = true;
+    }
+    std::cout<<"\n";
+    return input;
+}
+
+
 void BasicUI::run_program() {
     cout << display_start_message();
     while (true) {
@@ -66,7 +118,7 @@ void BasicUI::run_program() {
         cout << dispaly_main_menu();
         int option;
         cout << "Option: ";
-        cin >> option;
+        option = input_integer();
         cout << endl;
         if (option == 0) {
             break;

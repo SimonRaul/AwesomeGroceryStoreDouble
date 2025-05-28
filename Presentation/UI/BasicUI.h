@@ -36,6 +36,12 @@ namespace basicUI {
         pair<string,string> insert_name_and_forename();
         pair<string,string> insert_email_and_password();
 
+        int input_integer();
+
+        float input_float();
+
+        std::string input_string();
+
         //Run method
         void run_program();
     };

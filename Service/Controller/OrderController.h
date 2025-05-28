@@ -27,6 +27,8 @@ namespace controller {
 
         domain::OrderDomain getOrderByID(int id);
 
+        std::vector<pair<Product, float>> get_products_from_id(int id);
+
         //calculates the number of orders in a specified year
         double getTotalOrdersInYear(int year) const;
 
