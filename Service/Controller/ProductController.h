@@ -18,6 +18,8 @@ namespace productcontroller {
         std::vector<std::shared_ptr<Product>> listProducts();
         bool removeProduct(int id);
         bool updateProduct(const std::string& id, const std::string& name, float price, float quantity);
+
+        std::shared_ptr<Product> getProductById(int id);
     };
 }
 

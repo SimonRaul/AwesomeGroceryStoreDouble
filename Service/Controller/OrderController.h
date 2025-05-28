@@ -54,8 +54,8 @@ namespace controller {
         //creates a reservation
         bool createReservation(const Customer_Domain::Customer& customer, const std::vector<std::pair<Product, float>>& products);
 
-
-    };
+		void assignEmployeeIfUnassigned(int id, employeedomain::Employee ** employee);
+	};
 }
 
 #endif //ORDERCONTROLLER_H

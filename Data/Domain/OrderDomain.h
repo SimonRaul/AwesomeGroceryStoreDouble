@@ -35,9 +35,13 @@ class OrderDomain {
 
     //getter methods
     int getNumber() const;
-    std::tm getDate() const;
+
+    const std::tm getDate() const;
     OrderStatus getStatus() const;
     std::vector<std::pair<Product, float>> getProducts() const;
+
+    std::string products_to_string(std::vector<std::pair<Product, float>>);
+
     double getTotalPrice() const;
     employeedomain::Employee getEmployee() const;
     Customer getCustomer() const;

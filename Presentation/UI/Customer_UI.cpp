@@ -11,7 +11,6 @@ Customer_UI::Customer_UI(const std::string& cus_file, const std::string& prod_fi
 
 std::string Customer_UI::main_menu() {
     return "Choose an option:\n1 - See Products\n2 - Reserve Product\n3 - See orders\n4 - See order status (by order ID)\n5 - Exit\n------------------- * * * -------------------\n";
-
 }
 
 int Customer_UI::input_integer() {

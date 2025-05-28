@@ -26,7 +26,7 @@ int OrderDomain::getNumber() const {
   return this->number;
 }
 
-std::tm OrderDomain::getDate() const {
+const std::tm OrderDomain::getDate() const {
   return this->date;
 }
 

@@ -90,7 +90,8 @@ void BasicUI::run_program() {
             }
 
             if (dynamic_cast<Employee*>(raw_ptr)) {
-                // emp_ui.run();
+                emp_ui.run_main_menu(dynamic_cast<Employee*>(raw_ptr));
+
             } else if (dynamic_cast<Customer*>(raw_ptr)) {
                 cus_ui.run(dynamic_cast<Customer*>(raw_ptr));
             }
