@@ -21,7 +21,7 @@ namespace basicUI {
     private:
         string name, forename;
         Customer_UI cus_ui{"clients.txt", "products.txt", "orders.txt"};
-        EmployeeUI emp_ui;
+        EmployeeUI emp_ui {"products.txt", "orders.txt", "clients.txt"};
         UserController user_crt{ name, forename, "Accounts",
             "clients.txt", "employees.txt"};
     public:

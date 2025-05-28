@@ -10,7 +10,7 @@
 #include <memory>
 
 #include "../../Data/Repo/Customer_Repo.h"
-#include "../../Data/Repo/OrderRepo.h"
+#include "OrderController.h"
 #include "../../Data/Domain/Product.h"
 
 using namespace std;
@@ -22,10 +22,10 @@ namespace controller {
 class ClientManagementController {
 private:
     Customer_Repo::Customer_Repo cus_repo;
-    OrderRepo order_repo;
+    OrderController order_contr;
 
 public:
-    ClientManagementController(Customer_Repo::Customer_Repo& cus_repo, OrderRepo& order_repo);
+    ClientManagementController(const string& filename, const OrderController &order_contr);
     void gdprAnonymize(const string &email);
     bool createCustomer(const string &name, const string &forename,
         const string &email, const string &password, const string &address);
