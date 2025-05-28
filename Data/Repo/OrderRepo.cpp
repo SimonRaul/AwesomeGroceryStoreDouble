@@ -122,23 +122,23 @@ namespace repository {
     }
 
     double OrderRepo::getTotalOrdersInYear(int year) const {
-        int count = 0;
+        double total_money = 0;
         for (const auto& order : orders) {
             if ((order.getDate().tm_year + 1900) == year) {
-                ++count;
+                total_money += order.getTotalPrice();
             }
         }
-        return static_cast<double>(count);
+        return total_money;
     }
 
     double OrderRepo::getTotalOrdersInMonth(int month) const {
-        int count = 0;
+        double total_money = 0;
         for (const auto& order : orders) {
             if ((order.getDate().tm_mon + 1) == month) {
-                ++count;
+                total_money += order.getTotalPrice();
             }
         }
-        return static_cast<double>(count);
+        return total_money;
     }
 
     bool OrderRepo::isOrderNumberUnique(int orderNumber) const {

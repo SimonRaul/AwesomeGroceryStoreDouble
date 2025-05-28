@@ -30,6 +30,16 @@ namespace Customer_Domain{
         // setters
         void set_id(int new_id);
         void set_address(string new_address);
+
+        friend std::ostream& operator<<(std::ostream& os, Customer& customer) {
+            os << "ID: " << customer.get_id() << ", "
+               << "Name: " << customer.get_name() << ", "
+               << "Forename: " << customer.get_forename() << ", "
+               << "Email: " << customer.get_email() << ", "
+               << "Password: " << customer.get_password() << ", "
+               << "Address: " << customer.get_address() << "\n";
+            return os;
+        }
     };
 }
 

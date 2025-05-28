@@ -11,23 +11,23 @@ User::User(string name, string forename, string email, string password)
     : name(name), forename(forename), email(email), password(password) {}
 
 //Name getter
-string User::get_name() {
+const string User::get_name() {
     return name;
 }
 
 //Forename getter
-string User::get_forename() {
+const string User::get_forename() {
     return forename;
 }
 
 
 //Email getter
-string User::get_email() {
+const string User::get_email() {
     return email;
 }
 
 //Password getter
-string User::get_password() {
+const string User::get_password() {
     return password;
 }
 

@@ -36,6 +36,19 @@ class Employee: public User {
 	void set_birthday(year_month_day new_birthday);
 	void set_salary(float new_salary);
 	void set_id(int new_id);
+
+	friend std::ostream& operator<<(std::ostream& os, Employee& employee) {
+		os << "ID: " << employee.get_id() << ", "
+		   << "Name: " << employee.get_name() << ", "
+		   << "Forename: " << employee.get_forename() << ", "
+		   << "Email: " << employee.get_email() << ", "
+		   << "Password: " << employee.get_password() << ", "
+		   << "Position: " << employee.get_position() << ", "
+		   << "Birthday: " << employee.get_birthday() << ", "
+		   << "Salary: " << employee.get_salary() << "\n";
+		return os;
+	}
+
 };
 
 }

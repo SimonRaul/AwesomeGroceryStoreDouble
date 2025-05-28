@@ -60,8 +60,8 @@ pair<string,string> BasicUI::insert_email_and_password() {
 
 
 void BasicUI::run_program() {
+    cout << display_start_message();
     while (true) {
-        cout << display_start_message();
         // insert_name_and_forename();
         cout << dispaly_main_menu();
         int option;

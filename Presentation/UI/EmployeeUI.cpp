@@ -39,10 +39,11 @@ std::string EmployeeUI::order_menu() {
            "1 - List all reservations\n"
            "2 - List reservation by status\n"
            "3 - Show total income in a year\n"
-           "4 - Update order by ID\n"
-           "5 - Mark order as completed\n"
-           "6 - Mark order as confirmed\n"
-           "7 - Take order\n"
+           "4 - Show total income in a month\n"
+           "5 - Update order by ID\n"
+           "6 - Mark order as completed\n"
+           "7 - Mark order as confirmed\n"
+           "8 - Take order\n"
            "0 - Back to main menu\n------------------- * * * -------------------\n";
 }
 
@@ -55,9 +56,9 @@ std::string EmployeeUI::product_menu() {
 
 
 void EmployeeUI::run_main_menu(Employee* employee) {
-    std::cout << main_menu();
     bool exit = false;
     while (!exit) {
+        std::cout << main_menu();
         int option;
         option = input_integer();
         std::cout<<'\n';
@@ -83,10 +84,10 @@ void EmployeeUI::run_main_menu(Employee* employee) {
 }
 
 void EmployeeUI::run_client_menu(Employee* employee) {
-    std::cout << client_menu();
     bool exit = false;
 
     while (!exit) {
+        std::cout << client_menu();
         int option;
         option = input_integer();
         std::cout<<'\n';
@@ -96,7 +97,7 @@ void EmployeeUI::run_client_menu(Employee* employee) {
             clients = client_mgn.listByName();
             std::cout<<"Customers list:\n";
             for (auto& client : clients) {
-                cout<<"ID: "<<client->get_id()<<" Name: "<<client->get_name()<<" Forename: "<<client->get_forename()<<" E-Mail: "<<client->get_address()<<"\n";
+                cout << *client << "\n";
             }
             cout<<"\n------------------- * * * -------------------\n";
         }
@@ -107,7 +108,7 @@ void EmployeeUI::run_client_menu(Employee* employee) {
             clients = client_mgn.listByEmail(email);
             std::cout<<"Customers list:\n";
             for (auto& client : clients) {
-                cout<<"ID: "<<client->get_id()<<" Name: "<<client->get_name()<<" Forename: "<<client->get_forename()<<" E-Mail: "<<client->get_address()<<"\n";
+                cout << *client << "\n";
             }
             cout<<"\n------------------- * * * -------------------\n";
         }
@@ -120,7 +121,7 @@ void EmployeeUI::run_client_menu(Employee* employee) {
             clients = client_mgn.listByProduct(*product);
             std::cout<<"Customers list:\n";
             for (auto& client : clients) {
-                cout<<"ID: "<<client->get_id()<<" Name: "<<client->get_name()<<" Forename: "<<client->get_forename()<<" E-Mail: "<<client->get_address()<<"\n";
+                cout << *client << "\n";
             }
             cout<<"\n------------------- * * * -------------------\n";
         }
@@ -186,9 +187,9 @@ static domain::OrderStatus string_to_status(const std::string& status) {
 
 
 void EmployeeUI::run_order_menu(Employee* employee) {
-    cout << order_menu();
     bool exit = false;
     while (!exit) {
+        cout << order_menu();
         int option;
         option = input_integer();
         std::cout<<'\n';
@@ -196,24 +197,7 @@ void EmployeeUI::run_order_menu(Employee* employee) {
             std::cout<<"List all reservations\n";
             std::vector<domain::OrderDomain> orders = order_contr.getOrders();
             for (const auto& order : orders) {
-                // Output general order information
-                std::tm date = order.getDate();
-                std::cout << "Number: " << order.getNumber()
-                          << " Date: " << std::put_time(&date, "%Y-%m-%d")
-                          << " Status: " << order.status_to_string(order.getStatus())
-                          << " Customer: " << order.getCustomer().get_name()
-                          << " Employee: " << order.getEmployee().get_name()
-                          << " Total Price: " << order.getTotalPrice() << '\n';
-
-                // Print product details
-                std::cout << "  Products:\n";
-                for (const auto& [product, quantity] : order.getProducts()) {
-                    std::cout << "    - Name: " << product.get_name()
-                              << ", Quantity: " << quantity
-                              << ", Unit Price: " << product.get_price() << '\n';
-                }
-
-                std::cout << "---------------------------------------------\n";
+                cout << order << "\n";
             }
         }
         else if (option == 2) {
@@ -222,32 +206,18 @@ void EmployeeUI::run_order_menu(Employee* employee) {
             domain::OrderStatus order_status = string_to_status(status);
             std::vector<domain::OrderDomain> orders = order_contr.getOrdersByStatus(order_status);
             for (const auto& order : orders) {
-                // Output general order information
-                std::tm date = order.getDate();
-                std::cout << "Number: " << order.getNumber()
-                          << " Date: " << std::put_time(&date, "%Y-%m-%d")
-                          << " Status: " << order.status_to_string(order.getStatus())
-                          << " Customer: " << order.getCustomer().get_name()
-                          << " Employee: " << order.getEmployee().get_name()
-                          << " Total Price: " << order.getTotalPrice() << '\n';
-
-                // Print product details
-                std::cout << "  Products:\n";
-                for (const auto& [product, quantity] : order.getProducts()) {
-                    std::cout << "    - Name: " << product.get_name()
-                              << ", Quantity: " << quantity
-                              << ", Unit Price: " << product.get_price() << '\n';
-                }
-
-                std::cout << "---------------------------------------------\n";
+                cout << order << "\n";
             }
         }
         else if (option == 3) {
             std::cout<<"Please enter the year you want to search:\n";
             int year = input_integer();
-            std::cout<<order_contr.getTotalOrdersInYear(year);
+            std::cout<<order_contr.getTotalOrdersInYear(year) << "\n";
         }
-        // else if (option == 4) {
+        else if (option == 4) {
+            //Need implementation
+        }
+        // else if (option == 5) {
         //     std::cout<<"Please enter the order ID you want to update:\n";
         //     int id = input_integer();
         //     std::cout<<"Please enter the new status of the order:\n";
@@ -255,17 +225,17 @@ void EmployeeUI::run_order_menu(Employee* employee) {
         //     domain::OrderStatus order_status = string_to_status(status);
         //     order_contr.updateOrder(id, order_status);
         // }
-        else if (option == 5) {
+        else if (option == 6) {
             std::cout<<"Please enter the order ID you want to mark as completed:\n";
             int id = input_integer();
             order_contr.setOrderStatus(id, domain::OrderStatus::Completed);
         }
-        else if (option == 6) {
+        else if (option == 7) {
             std::cout<<"Please enter the order ID you want to mark as confirmed:\n";
             int id = input_integer();
             order_contr.setOrderStatus(id, domain::OrderStatus::Confirmed);
         }
-        else if (option == 7) {
+        else if (option == 8) {
             std::cout<<"Please enter the order ID you want to take:\n";
             int id = input_integer();
             order_contr.assignEmployeeIfUnassigned(id, *employee);
@@ -280,9 +250,9 @@ void EmployeeUI::run_order_menu(Employee* employee) {
 }
 
 void EmployeeUI::run_product_menu(Employee* employee) {
-    cout << product_menu();
     bool exit = false;
     while (!exit) {
+        cout << product_menu();
         int option;
         option = input_integer();
         std::cout<<'\n';
@@ -303,9 +273,7 @@ void EmployeeUI::run_product_menu(Employee* employee) {
             std::cout<<"List all products\n";
             std::vector<std::shared_ptr<Product>> products = prod_contr.listProducts();
             for (const auto& product : products) {
-                std::cout << " Name: " << product->get_name()
-                          << " Price: " << product->get_price()
-                          << " Quantity: " << product->get_quantity() << '\n';
+                std::cout << *product << "\n";
             }
         }
         else if (option == 0) {
