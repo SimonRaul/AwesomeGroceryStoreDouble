@@ -42,7 +42,7 @@ namespace repository {
 
     OrderRepo::OrderRepo(const string& filename) {
         this->filename = filename;
-    auto lines = readFileSplitByColon(filename);
+    auto lines = readFileSplitByColon(this->filename);
 
     for (const auto& tokens : lines) {
         if (tokens.size() < 7) continue;
