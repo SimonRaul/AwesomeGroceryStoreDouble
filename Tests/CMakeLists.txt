@@ -22,6 +22,8 @@ add_executable(runTests
         OrderDomainTest.cpp
         Customer_RepoTest.cpp
         EmployeeRepoTest.cpp
+        ProductRepoTest.cpp
+        OrderRepoTest.cpp
         ${DOMAIN_SRC}
         ${SERVICE_SRC}
         ${REPO_SRC}
@@ -34,7 +36,7 @@ configure_file(${CMAKE_SOURCE_DIR}/Tests/AccountsTest AccountsTest COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/Tests/clientsTest.txt clientsTest.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/Tests/employees_test.txt employees_test.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/Tests/orders_test.txt orders_test.txt COPYONLY)
-configure_file(${CMAKE_SOURCE_DIR}/Tests/products_test.txt products_test.txt COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/tests/prod_test.txt prod_test.txt COPYONLY)
 
 
 gtest_discover_tests(runTests)

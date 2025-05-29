@@ -28,7 +28,7 @@ namespace productrepo {
         bool update(const std::string& id, const std::string& name, float price, float quantity);
         bool remove(int id) override;
         bool validate_id(int id);
-        bool validate_stock(int id, int amount);
+        bool validate_stock(int id, float amount);
         
         std::vector<std::shared_ptr<Product>> list() override;
 
