@@ -127,7 +127,7 @@ namespace productrepo {
             {
                 if ((*it)->get_id() == std::to_string(id))
                 {
-                    if (float(amount) <= (*it)->get_quantity())
+                    if (amount <= (*it)->get_quantity())
                     {
                         return true;
                     }

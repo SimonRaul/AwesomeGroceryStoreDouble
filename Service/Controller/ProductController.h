@@ -23,7 +23,7 @@ namespace productcontroller {
 
         bool validate_id(int id);
 
-        bool validate_stock(int id, int amount);
+        bool validate_stock(int id, float amount);
     };
 }
 
