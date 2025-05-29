@@ -166,13 +166,13 @@ namespace repository {
         return true;
     }
 
-    bool OrderRepo::canModifyOrder(int orderNumber, const employeedomain::Employee& employee) const {
+    bool OrderRepo::canModifyOrder(int orderNumber, int id) const {
         for (const auto& order : orders) {
             if (order.getNumber() == orderNumber) {
                 if (order.getStatus() == domain::OrderStatus::Completed) {
                     return false;
                 }
-                if (order.getEmployee().get_id() == employee.get_id()) {
+                if (order.getEmployee().get_id() == id) {
                     return true;
                 } else {
                     return false;

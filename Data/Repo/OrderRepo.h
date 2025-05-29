@@ -44,7 +44,7 @@ class OrderRepo {
   bool isOrderNumberUnique(int orderNumber) const;
 
   //checks if an employee can modify an order
-  bool canModifyOrder(int orderNumber, const employeedomain::Employee& employee) const;
+  bool canModifyOrder(int orderNumber, int id) const;
 
   //adds a new order
   void addOrder(const domain::OrderDomain& order);

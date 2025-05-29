@@ -223,46 +223,52 @@ void EmployeeUI::run_order_menu(Employee* employee) {
         else if (option == 5) {
             std::cout<<"Please enter the order ID you want to update:\n";
             int id = input_integer();
-            // validate if employee has order or no
-            std::vector<pair<Product,float>> ordered_products;
-            ordered_products = order_contr.get_products_from_id(id);
-            if (!ordered_products.empty()) {
-                cout<<"Current products in order are: \n";
-                for (auto& product : ordered_products) {
-                    cout<<product.first<<"\nQuantity ordered: "<<product.second<<endl;
-                }
 
-            std::vector<pair<Product,float>> new_products;
-            std::vector<pair<int,float>> new_products_id;
-            int product_id = -1;
-            float quantity;
-            while (product_id != 0) {
-                cout<<"Please enter the id of the products you want to put in the order or number 0 to stop:\n";
-                product_id = input_integer();
-                // validare ID
-                if (product_id != 0){
-                    cout<<"Please enter the quantity:\n";
-                    quantity = input_float();
-                    new_products_id.push_back({product_id,quantity});
-                }
-                // validare stoc
-            }
-            std::vector<std::shared_ptr<Product>> products;
-            products = prod_contr.listProducts();
-            while (!new_products_id.empty()) {
-                pair<int,float> current_product = new_products_id.back();
-                new_products_id.pop_back();
-                for (int i = 0; i < products.size(); i++) {
-                    if (stoi(products[i]->get_id()) == current_product.first) {
-                        new_products.push_back({*products[i], current_product.second});
+                // validate if employee has order or no and if order can be modified
+                std::vector<pair<Product,float>> ordered_products;
+                ordered_products = order_contr.get_products_from_id(id);
+                if (!ordered_products.empty()) {
+                    cout<<"Current products in order are: \n";
+                    for (auto& product : ordered_products) {
+                        cout<<product.first<<"\nQuantity ordered: "<<product.second<<endl;
                     }
-                }
-            }
+                    if (order_contr.canModifyOrder(id, employee->get_id())){
+                        std::vector<pair<Product,float>> new_products;
+                        std::vector<pair<int,float>> new_products_id;
+                        int product_id = -1;
+                        float quantity;
+                        while (product_id != 0) {
+                            cout<<"Please enter the id of the products you want to put in the order or number 0 to stop:\n";
+                            product_id = input_integer();
+                            if (prod_contr.validate_id(product_id)) {
+                                if (product_id != 0){
+                                    cout<<"Please enter the quantity:\n";
+                                    quantity = input_float();
+                                    new_products_id.push_back({product_id,quantity});
+                                }
+                            }else {
+                                cout<<"Product not found!\n";
+                            }
+                            // validare stoc
+                        }
+                        std::vector<std::shared_ptr<Product>> products;
+                        products = prod_contr.listProducts();
+                        while (!new_products_id.empty()) {
+                            pair<int,float> current_product = new_products_id.back();
+                            new_products_id.pop_back();
+                            for (int i = 0; i < products.size(); i++) {
+                                if (stoi(products[i]->get_id()) == current_product.first) {
+                                    new_products.push_back({*products[i], current_product.second});
+                                }
+                            }
+                        }
 
-            order_contr.updateOrder(id,new_products);
-        }
-            else {
-                cout<<"No order found\n";
+                        order_contr.updateOrder(id,new_products);
+                    }else {
+                        cout<<"Employee can not modify order (not assigned/completed)\n";
+                    }
+                }else {
+                    cout<<"Order is empty/not found!\n";
             }
         }
         else if (option == 6) {

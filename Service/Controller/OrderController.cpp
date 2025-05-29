@@ -60,8 +60,8 @@ bool OrderController::validateID(int id) {
     return orderRepo.isOrderNumberUnique(orderNumber);
   }
 
-  bool OrderController::canModifyOrder(int orderNumber, const employeedomain::Employee& employee) const {
-    return orderRepo.canModifyOrder(orderNumber, employee);
+  bool OrderController::canModifyOrder(int orderNumber, int id) const {
+    return orderRepo.canModifyOrder(orderNumber, id);
   }
 
   void OrderController::addOrder(const domain::OrderDomain& order) {
