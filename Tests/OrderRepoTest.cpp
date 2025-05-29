@@ -67,8 +67,8 @@ TEST_F(OrderRepoTest, CanModifyOrderChecksStatusAndEmployee) {
     Employee jane("Smith", "Jane", "jane.smith@example.com", "admin123", "Manager", {}, 0.0f);
     jane.set_id(201);
 
-    EXPECT_TRUE(repo->canModifyOrder(1, jane));
-    EXPECT_FALSE(repo->canModifyOrder(2, jane));  // Confirmed by someone else
+    EXPECT_TRUE(repo->canModifyOrder(1, jane.get_id()));
+    EXPECT_FALSE(repo->canModifyOrder(2, jane.get_id()));  // Confirmed by someone else
 }
 
 TEST_F(OrderRepoTest, SetOrderStatusUpdatesCorrectly) {
