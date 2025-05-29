@@ -236,7 +236,7 @@ void EmployeeUI::run_order_menu(Employee* employee) {
                         std::vector<pair<Product,float>> new_products;
                         std::vector<pair<int,float>> new_products_id;
                         int product_id = -1;
-                        float quantity;
+                        float quantity = -1;
                         while (product_id != 0) {
                             cout<<"Please enter the id of the products you want to put in the order or number 0 to stop:\n";
                             product_id = input_integer();
@@ -244,7 +244,12 @@ void EmployeeUI::run_order_menu(Employee* employee) {
                                 if (product_id != 0){
                                     cout<<"Please enter the quantity:\n";
                                     quantity = input_float();
-                                    new_products_id.push_back({product_id,quantity});
+                                    if (prod_contr.validate_stock(id, quantity)) {
+                                        new_products_id.push_back({product_id,quantity});
+                                    }
+                                    else {
+                                        cout << "Not enough stock, try again!" << endl;
+                                    }
                                 }
                             }else {
                                 cout<<"Product not found!\n";
