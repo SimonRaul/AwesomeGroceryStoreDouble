@@ -20,6 +20,10 @@ namespace productcontroller {
         bool updateProduct(const std::string& id, const std::string& name, float price, float quantity);
 
         std::shared_ptr<Product> getProductById(int id);
+
+        bool validate_id(int id);
+
+        bool validate_stock(int id, int amount);
     };
 }
 

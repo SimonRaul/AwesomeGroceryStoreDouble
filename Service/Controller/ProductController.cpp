@@ -42,3 +42,12 @@ std::shared_ptr<Product> ProductController::getProductById(int id) {
     return nullptr;
 }
 
+bool ProductController::validate_id (int id)
+{
+    return productRepository.validate_id(id);
+}
+
+bool ProductController::validate_stock(int id, int amount)
+{
+    return productRepository.validate_stock(id,amount);
+}
